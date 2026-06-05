@@ -3,6 +3,9 @@ import movies from "../Movies";
 import { useEffect, useState } from "react";
 import { getWishlist, saveWishlist } from "../wishlist";
 import logo from "../assets/logo.png";
+import GenrePage from "./GenrePage";
+
+
 
 import {
   Play,
@@ -14,49 +17,59 @@ import {
 
 
 // MOVIE ROW
-  const Row = ({ title, movies, onMovieClick }) => (
-    <div className="px-6 mt-10">
+ const Row = ({ title, movies, onMovieClick, onMore }) => (
+    <div className="px-6  mt-0 md:mt-0 relative z-0">
 
       {/* ROW HEADER */}
       <div className="flex items-center justify-between mb-4">
 
-        <h2 className="text-2xl font-bold border-l-4 border-red-600 pl-3">
-          {title}
-        </h2>
+        <h2 className="text-2xl font-bold border-l-4 border-red-600 pl-3"
+    style={{ fontFamily: "Inter, sans-serif" }}>
+  {title}
+</h2>
 
-        <button className="flex items-center gap-1 text-gray-400 hover:text-white text-sm">
-          More <ChevronRight size={16} />
-        </button>
+        <button
+  onClick={() => onMore(title, movies)}
+  className="flex items-center gap-1 text-gray-400 hover:text-white text-sm"
+>
+  More <ChevronRight size={16} />
+</button>
 
       </div>
 
       {/* MOVIES */}
-      <div className="flex gap-4 overflow-x-auto overflow-y-visible scroll-smooth no-scrollbar pb-6">
+      <div className="flex gap-4 overflow-x-auto overflow-y-visible scroll-smooth no-scrollbar pb-10 pt-4 pl-4 relative z-0">
 
         {movies.map((m) => (
           <div
   key={m.id}
   onClick={() => onMovieClick(m)}
-  className="min-w-[180px] cursor-pointer group relative z-10 hover:z-50 transition-all duration-300"
+  className="min-w-[90px] md:min-w-[180px] cursor-pointer group relative z-10 transition-all duration-300 hover:scale-105 hover:-translate-y-2 shadow-2xl"
 >
 
   {/* IMAGE WRAPPER */}
   <div className="relative rounded-lg overflow-hidden shadow-lg transition duration-300 group-hover:shadow-2xl">
 
     {/* TYPE BADGE */}
-    <div className="absolute top-2 left-2 z-10 bg-red-600 px-3 py-1 rounded text-xs font-bold">
+    <div className="absolute top-2 left-2 z-10 bg-white text-black px-2 py-1 rounded text-[10px] font-bold">
       {m.type}
     </div>
 
     {/* POSTER */}
     <img
-      src={
-        m.poster_path?.startsWith("http")
-          ? m.poster_path
-          : "https://image.tmdb.org/t/p/w500" + m.poster_path
-      }
-      className="w-[180px] h-[270px] object-cover rounded-lg transition-transform duration-300 group-hover:scale-110"
-    />
+  src={
+    m.poster_path?.startsWith("http")
+      ? m.poster_path
+      : "https://image.tmdb.org/t/p/w500" + m.poster_path
+  }
+ className="
+    w-[110px] h-[165px]
+    md:w-[180px] md:h-[270px]
+    object-cover rounded-lg
+    transition-transform duration-300
+    group-hover:scale-105
+  "
+/>
 
   </div>
 
@@ -100,6 +113,12 @@ const [anime, setAnime] = useState([]);
   const [videoUrl, setVideoUrl] = useState(null);
 
   const navigate = useNavigate();
+
+const handleMore = (title, moviesList) => {
+  navigate(`/genre/${title}`, {
+    state: { movies: moviesList, title }
+  });
+};
 
 
 const deleteProfile = (id) => {
@@ -273,34 +292,34 @@ useEffect(() => {
 
 
      {/* NAVBAR WRAPPER */}
+     <div style={{ fontFamily: "Inter, sans-serif" }}></div>
 <div className="relative z-50">
 
   {/* ================= DESKTOP NAVBAR ================= */}
-  <div className="hidden md:flex items-center w-full px-6 py-4 border-b border-white/10 relative bg-white/3 backdrop-blur-xl">
+  <div className="hidden md:flex items-center w-full px-6 py-4 border-b border-white/10 relative bg-transparent backdrop-blur-md">
 
     {/* LEFT */}
     <div className="flex items-center gap-4">
       <img
   src={logo}
   alt="Logo"
- className="h-14 w-auto object-contain"
+ className="h-14 w-15 object-contain"
 />
 
-      {currentProfile && (
-        <div className="text-sm text-gray-300">
-          Welcome, <span className="text-white font-semibold">{currentProfile.name}</span>
-        </div>
-      )}
+      
     </div>
 
     {/* CENTER MENU */}
-    <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-6 text-gray-400 text-sm font-medium">
+    <div
+  className="flex items-center gap-6 text-gray-400 text-base font-medium ml-4"
+  style={{ fontFamily: "Inter, sans-serif" }}
+>
 
       {["home", "movies", "series", "anime", "wishlist"].map((tab) => (
         <button
           key={tab}
           onClick={() => setActiveTab(tab)}
-          className={`${activeTab === tab ? "text-red-500" : "text-gray-400"} hover:text-red-500`}
+         className={`${activeTab === tab ? "text-white" : "text-gray-400"} hover:text-gray-200 transition`}
         >
           {tab.charAt(0).toUpperCase() + tab.slice(1)}
         </button>
@@ -308,11 +327,14 @@ useEffect(() => {
 
     </div>
 
-    {/* RIGHT SEARCH */}
-   <div className="absolute right-6 top-1/2 -translate-y-1/2">
-  
+    {/* RIGHT SECTION */}
+<div className="ml-auto flex items-center gap-6">
+
+  {/* SEARCH + DROPDOWN WRAPPER */}
+<div className="relative">
+
   {/* SEARCH BOX */}
-  <div className="flex items-center bg-white/10 px-3 py-2 rounded w-80">
+  <div className="flex items-center bg-white/10 px-3 py-2 rounded w-72">
     <Search size={16} />
 
     <input
@@ -324,9 +346,9 @@ useEffect(() => {
     />
   </div>
 
-  {/* DROPDOWN */}
+  {/* DROPDOWN (FIXED ALIGNMENT) */}
   {searchTerm && searchResults.length > 0 && (
-    <div className="absolute top-full mt-2 w-80 bg-black/95 border border-white/10 rounded-lg max-h-80 overflow-y-auto z-50">
+    <div className="absolute left-0 top-full mt-2 w-72 bg-black/95 border border-white/10 rounded-lg max-h-80 overflow-y-auto z-50">
 
       {searchResults.map((movie) => (
         <div
@@ -348,11 +370,32 @@ useEffect(() => {
 
     </div>
   )}
+
+</div>
+
+  {/* PROFILE SECTION */}
+  {currentProfile && (
+    <div className="flex flex-col items-center text-center">
+      
+      {/* PROFILE IMAGE */}
+      <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center text-black font-bold">
+        {currentProfile.name?.charAt(0).toUpperCase()}
+      </div>
+
+      {/* NAME BELOW */}
+      <span className="text-xs text-gray-300 mt-1">
+        {currentProfile.name}
+      </span>
+
+    </div>
+  )}
+
+
 </div>
   </div>
 
   {/* ================= MOBILE NAVBAR ================= */}
-  <div className="flex md:hidden items-center justify-between w-full px-4 py-3 border-b border-white/10 bg-black/40 backdrop-blur-md relative z-50">
+  <div className="flex md:hidden items-center justify-between w-full px-4 py-3 border-b border-white/10 bg-transparent backdrop-blur-md relative z-50">
 
     {/* LEFT */}
     <div className="flex items-center gap-3">
@@ -470,7 +513,7 @@ useEffect(() => {
       </div>
 
       {/* HERO SECTION */}
-      <div className="relative h-[70vh] overflow-hidden z-0">
+      <div className="relative h-[55vh] md:h-[70vh] overflow-hidden z-0">
 
         {hero.map((item, i) => (
           <div
@@ -493,7 +536,7 @@ useEffect(() => {
             {/* OVERLAY */}
             <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 flex items-center px-10">
 
-              <div className="max-w-xl">
+              <div className="max-w-xl mt-14 md:mt-0">
 
                 <div className="flex items-center gap-3">
 
@@ -507,9 +550,9 @@ useEffect(() => {
 
 </div>
 
-                <p className="text-gray-300 text-sm mt-4">
-                  {item.overview}
-                </p>
+                <p className="hidden md:block text-gray-300 text-sm mt-4">
+  {item.overview}
+</p>
 
                 <button
   onClick={() => openMovie(hero[heroIndex])}
@@ -531,9 +574,26 @@ useEffect(() => {
       {/* ROWS */}
      {activeTab === "home" && (
   <>
-    <Row title="🔥 Trending" movies={trending} onMovieClick={openMovie} />
-<Row title="⭐ Popular" movies={popular} onMovieClick={openMovie} />
-<Row title="💥 Action" movies={action} onMovieClick={openMovie} />
+    <Row
+  title="Trending"
+  movies={trending}
+  onMovieClick={openMovie}
+  onMore={handleMore}
+/>
+
+<Row
+  title="Popular"
+  movies={popular}
+  onMovieClick={openMovie}
+  onMore={handleMore}
+/>
+
+<Row
+  title="Action"
+  movies={action}
+  onMovieClick={openMovie}
+  onMore={handleMore}
+/>
   </>
 )}
 
@@ -651,7 +711,7 @@ useEffect(() => {
               {/* WATCH TRAILER */}
               <button
   onClick={() => navigate(`/watch/${selected.id}`)}
-  className="bg-red-600 hover:bg-red-700 px-5 py-2 rounded flex items-center gap-2"
+  className="bg-white text-black hover:bg-gray-200 px-5 py-2 rounded flex items-center gap-2 font-semibold"
 >
   <Play size={18} />
   Play
@@ -676,7 +736,7 @@ useEffect(() => {
                 <Heart
                   className={
                     wishlist.find((m) => m.id === selected.id)
-                      ? "text-red-500 fill-red-500"
+                      ? "text-white fill-white"
                       : "text-gray-400"
                   }
                 />

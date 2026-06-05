@@ -16,6 +16,13 @@ export default function Watch() {
     setWishlist(getWishlist());
   }, []);
 
+useEffect(() => {
+  return () => {
+    setShowPlayer(false);
+  };
+}, []);
+
+
   const movie = movies.find((m) => String(m.id) === String(id));
 
   if (!movie)
@@ -26,7 +33,7 @@ export default function Watch() {
 
       {/* ================= HERO BACKDROP ================= */}
       {!showPlayer && (
-        <div className="relative w-full h-[85vh]">
+        <div className="relative w-full h-[60vh] md:h-[85vh]">
 
           <img
             src={
@@ -46,14 +53,16 @@ export default function Watch() {
                 {movie.title}
               </h1>
 
-              <p className="text-gray-300 max-w-xl mb-6">
-                {movie.overview}
-              </p>
+              <p className="hidden md:block text-gray-300 max-w-xl mb-6">
+  {movie.overview}
+</p>
 
               <div className="flex items-center gap-4">
 
                 <button
-                  onClick={() => setShowPlayer(true)}
+                  onClick={() => {
+  setShowPlayer(true);
+}}
                   className="bg-white text-black px-6 py-2 rounded flex items-center gap-2 font-semibold hover:scale-105 transition"
                 >
                   <Play size={18} />
@@ -77,12 +86,12 @@ export default function Watch() {
                   className="flex items-center gap-2"
                 >
                   <Heart
-                    className={
-                      wishlist.some((m) => String(m.id) === String(movie.id))
-                        ? "text-red-500 fill-red-500"
-                        : "text-white"
-                    }
-                  />
+  className={
+    wishlist.some((m) => String(m.id) === String(movie.id))
+      ? "text-white fill-white"
+      : "text-white"
+  }
+/>
                   Wishlist
                 </button>
 
@@ -96,17 +105,58 @@ export default function Watch() {
 
       {/* ================= PLAYER ================= */}
       {showPlayer && (
-        <div className="pt-6 px-6">
-          <div className="max-w-7xl mx-auto">
+  <div className="pt-1 px-0 md:px-6">
+    <div className="w-full max-w-[100vw] md:max-w-7xl mx-auto px-2 md:px-0">
 
-            <CustomVideoPlayer
-              ref={playerRef}
-              src={movie.videoUrl}
-            />
+      <div className="w-full md:w-auto scale-[1.05] md:scale-100 origin-top">
 
-          </div>
-        </div>
-      )}
+        <CustomVideoPlayer
+          key={movie.id}   // 🔥 IMPORTANT FIX
+          ref={playerRef}
+          src={movie.videoUrl}
+        />
+
+<div className="flex items-center justify-between mt-4 px-1 md:px-0">
+
+  {/* TITLE */}
+  <h1 className="text-2xl md:text-3xl font-bold">
+    {movie.title}
+  </h1>
+
+  {/* HEART */}
+  <button
+    onClick={() => {
+      const current = getWishlist();
+      const exists = current.some(
+        (m) => String(m.id) === String(movie.id)
+      );
+
+      const updated = exists
+        ? current.filter((m) => String(m.id) !== String(movie.id))
+        : [...current, movie];
+
+      setWishlist(updated);
+      saveWishlist(updated);
+    }}
+    className="text-white"
+  >
+    <Heart
+      className={
+        wishlist.some((m) => String(m.id) === String(movie.id))
+          ? "text-white fill-white"
+          : "text-white"
+      }
+      size={26}
+    />
+  </button>
+
+</div>
+
+      </div>
+
+    </div>
+  </div>
+)}
 
       {/* ================= SUGGESTIONS ================= */}
       <div className="max-w-7xl mx-auto px-6 mt-10">
@@ -127,27 +177,38 @@ export default function Watch() {
             )
             .slice(0, 12)
             .map((m) => (
-              <div
+             <div
   key={m.id}
-  className="cursor-pointer group w-full"
-                onClick={() =>
-                  (window.location.href = `/watch/${m.id}`)
-                }
-              >
+  className="cursor-pointer group relative transition-all duration-300 hover:scale-105 hover:-translate-y-2"
+  onClick={() => (window.location.href = `/watch/${m.id}`)}
+>
 
-                <img
-  src={
-    m.poster_path?.startsWith("http")
-      ? m.poster_path
-      : "https://image.tmdb.org/t/p/w500" + m.poster_path
-  }
-  className="w-full aspect-[2/3] object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
-/>
-                <p className="mt-2 text-sm text-gray-300 line-clamp-1">
-                  {m.title}
-                </p>
+  {/* IMAGE WRAPPER */}
+  <div className="relative rounded-lg overflow-hidden shadow-lg transition duration-300 group-hover:shadow-2xl">
 
-              </div>
+    {/* TYPE BADGE */}
+    <div className="absolute top-2 left-2 z-10 bg-white text-black px-2 py-1 rounded text-[10px] font-bold">
+      {m.type}
+    </div>
+
+    {/* POSTER */}
+    <img
+      src={
+        m.poster_path?.startsWith("http")
+          ? m.poster_path
+          : "https://image.tmdb.org/t/p/w500" + m.poster_path
+      }
+      className="w-full aspect-[2/3] object-cover transition-transform duration-300 group-hover:scale-105"
+    />
+
+  </div>
+
+  {/* TITLE */}
+  <p className="mt-2 text-sm text-gray-300 line-clamp-1">
+    {m.title}
+  </p>
+
+</div>
             ))}
 
         </div>
