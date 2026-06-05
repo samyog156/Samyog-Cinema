@@ -293,10 +293,10 @@ useEffect(() => {
 
      {/* NAVBAR WRAPPER */}
      <div style={{ fontFamily: "Inter, sans-serif" }}></div>
-<div className="relative z-50">
+<div className="relative w-full z-50 bg-transparent">
 
   {/* ================= DESKTOP NAVBAR ================= */}
-  <div className="hidden md:flex items-center w-full px-6 py-4 border-b border-white/10 relative bg-transparent backdrop-blur-md">
+  <div className="hidden md:flex items-center w-full px-6 py-4 bg-transparent absolute top-0 left-0 z-50">
 
     {/* LEFT */}
     <div className="flex items-center gap-4">
@@ -395,7 +395,7 @@ useEffect(() => {
   </div>
 
   {/* ================= MOBILE NAVBAR ================= */}
-  <div className="flex md:hidden items-center justify-between w-full px-4 py-3 border-b border-white/10 bg-transparent backdrop-blur-md relative z-50">
+  <div className="fixed top-0 left-0 w-full flex md:hidden items-center justify-between px-4 py-3 border-b border-white/10 bg-transparent z-50">
 
     {/* LEFT */}
     <div className="flex items-center gap-3">
@@ -513,7 +513,7 @@ useEffect(() => {
       </div>
 
       {/* HERO SECTION */}
-      <div className="relative h-[55vh] md:h-[70vh] overflow-hidden z-0">
+      <div className="relative h-[28vh] md:h-[85vh] overflow-hidden">
 
         {hero.map((item, i) => (
           <div
@@ -525,26 +525,23 @@ useEffect(() => {
           >
 
             {/* HERO IMAGE */}
-            <img
-              src={
-                "https://image.tmdb.org/t/p/original" +
-                item.backdrop_path
-              }
-              className="w-full h-full object-cover opacity-60"
-            />
+           <img
+  src={"https://image.tmdb.org/t/p/original" + item.backdrop_path}
+  className="absolute inset-0 w-full h-full object-contain bg-black"
+/>
 
             {/* OVERLAY */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 flex items-center px-10">
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent flex items-end px-10 pb-10">
 
               <div className="max-w-xl mt-14 md:mt-0">
 
                 <div className="flex items-center gap-3">
 
-  <h1 className="text-5xl font-extrabold">
-    {item.title}
-  </h1>
+  <h1 className="text-2xl md:text-5xl font-extrabold">
+  {item.title}
+</h1>
 
-  <div className="bg-white text-black px-4 py-1 rounded text-sm font-bold mt-4">
+  <div className="bg-white text-black px-2 py-1 rounded text-xs md:text-sm font-bold mt-3 md:mt-4">
     {item.type}
   </div>
 
@@ -556,7 +553,7 @@ useEffect(() => {
 
                 <button
   onClick={() => openMovie(hero[heroIndex])}
-  className="mt-5 bg-white text-black hover:bg-gray-200 px-5 py-2 rounded flex items-center gap-2 font-semibold transition"
+  className="mt-4 md:mt-5 bg-white text-black hover:bg-gray-200 px-3 py-1.5 md:px-5 md:py-2 text-sm md:text-base rounded flex items-center gap-2 font-semibold transition"
 >
   <Play size={16} />
   Play Now
@@ -573,30 +570,31 @@ useEffect(() => {
 
       {/* ROWS */}
      {activeTab === "home" && (
-  <>
+  <div className="mt-10 md:mt-5">
+    
     <Row
-  title="Trending"
-  movies={trending}
-  onMovieClick={openMovie}
-  onMore={handleMore}
-/>
+      title="Trending"
+      movies={trending}
+      onMovieClick={openMovie}
+      onMore={handleMore}
+    />
 
-<Row
-  title="Popular"
-  movies={popular}
-  onMovieClick={openMovie}
-  onMore={handleMore}
-/>
+    <Row
+      title="Popular"
+      movies={popular}
+      onMovieClick={openMovie}
+      onMore={handleMore}
+    />
 
-<Row
-  title="Action"
-  movies={action}
-  onMovieClick={openMovie}
-  onMore={handleMore}
-/>
-  </>
+    <Row
+      title="Action"
+      movies={action}
+      onMovieClick={openMovie}
+      onMore={handleMore}
+    />
+
+  </div>
 )}
-
 {activeTab === "movies" && (
   <Row
     title="🎬 Movies"
@@ -806,7 +804,7 @@ useEffect(() => {
 
       <button
         onClick={createProfile}
-        className="w-full mt-5 bg-white hover:bg-gray transition py-3 rounded-lg font-semibold"
+        className="w-full mt-5 bg-red hover:bg-gray transition py-3 rounded-lg font-semibold"
       >
         Continue
       </button>

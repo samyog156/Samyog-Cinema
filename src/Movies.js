@@ -2,7 +2,7 @@ const movies = [
   {
     id: "01",
     title: "Kara",
-    genre: ["hero", "trending"],
+    genre: ["hero", "trending","popular","action"],
     type: "Movie",
 
     overview:
