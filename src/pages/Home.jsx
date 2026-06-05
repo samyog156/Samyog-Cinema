@@ -806,7 +806,7 @@ useEffect(() => {
 
       <button
         onClick={createProfile}
-        className="w-full mt-5 bg-red-600 hover:bg-red-700 transition py-3 rounded-lg font-semibold"
+        className="w-full mt-5 bg-white hover:bg-gray transition py-3 rounded-lg font-semibold"
       >
         Continue
       </button>

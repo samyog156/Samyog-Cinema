@@ -42,22 +42,22 @@ const movies = [
 
   {
     id: "03",
-    title: "Neon City",
-    genre: ["popular","action"],
-    type: "Anime",
+    title: "Ginny Wedss Sunny 2",
+    genre: ["romance","drama","trending","hero"],
+    type: "Movie",
 
     overview:
-      "A hacker discovers a truth that can collapse the digital world.",
+      "A mismatched pair, with a storyline involving a wrestler and a vibrant girl, combining romance, comedy, and drama.",
 
     poster_path:
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d",
+      "https://www.themoviedb.org/t/p/w600_and_h900_face/8lovlbsow4B5KbznLYDNky8usgc.jpg",
 
     backdrop_path:
-      "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa",
+      "https://image.tmdb.org/t/p/original/lPmnzhNy3I1Vr7MNfSbUF3MVESZ.jpg",
 
-    trailerId: "1h9_cB2Xc0M",
+    trailerId: "8GYsnraCOrg",
 
-    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+    videoUrl: "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaTvXFNWHSM9l6f8JeVMKz18IekbynEI4iqLEu/Ginny.Wedss.Sunny.2.2026.720p.AMZN.WEB.DL.Hindi.AAC2.0.H.264.mkv",
   },
 ];
 
