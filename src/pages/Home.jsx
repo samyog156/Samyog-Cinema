@@ -24,7 +24,7 @@ import {
     <div className="flex items-center justify-between mb-4">
 
       <h2
-  className="text-lg md:text-xl font-bold border-l-4 border-red-600 pl-3"
+  className="text-lg md:text-xl font-semibold tracking-wide border-l-4 border-red-600 pl-3 flex items-center gap-2"
   style={{ fontFamily: "Inter, sans-serif" }}
 >
   {title}
@@ -105,6 +105,70 @@ import {
 
   </div>
 );
+
+
+
+const Grid = ({ title, movies, onMovieClick }) => (
+  <div className="px-4 md:px-6 mt-6 "
+  style={{ fontFamily: "Inter, sans-serif" }}>
+
+    {/* HEADER */}
+    <h2 className="text-lg md:text-xl font-semibold tracking-wide border-l-4 border-red-600 pl-3 mb-4"
+    style={{ fontFamily: "Inter, sans-serif" }}>
+      {title}
+    </h2>
+
+    {/* GRID */}
+    <div className="
+      grid
+      grid-cols-3
+      sm:grid-cols-4
+      md:grid-cols-5
+      lg:grid-cols-6
+      xl:grid-cols-7
+      gap-3 md:gap-4
+      pb-6
+    ">
+
+      {movies.map((m) => (
+        <div
+          key={m.id}
+          onClick={() => onMovieClick(m)}
+          className="cursor-pointer group transition-transform duration-300 hover:scale-105"
+        >
+
+          <div className="relative rounded-lg overflow-hidden shadow-lg">
+
+            {/* TYPE BADGE */}
+            <div className="absolute top-2 left-2 z-10 bg-white text-black px-2 py-1 rounded text-[10px] font-bold">
+              {m.type}
+            </div>
+
+            <img
+              src={
+                m.poster_path?.startsWith("http")
+                  ? m.poster_path
+                  : "https://image.tmdb.org/t/p/w500" + m.poster_path
+              }
+              className="w-full aspect-[2/3] object-cover"
+            />
+
+          </div>
+
+          <p className="mt-2 text-[12px] md:text-sm text-gray-300 line-clamp-1">
+            {m.title}
+          </p>
+
+        </div>
+      ))}
+
+    </div>
+  </div>
+);
+
+
+
+
 
 
 export default function Home() {
@@ -627,72 +691,54 @@ style={{ backgroundImage: `url(${heroBg})` }}
   </div>
 
 </div>
-      {/* ROWS */}
-     {activeTab === "home" && (
-  <div className="mt-10 md:mt-5">
-    
-    <Row
-      title="Trending"
-      movies={trending.slice(0, 15)}   // ✅ limit
-      onMovieClick={openMovie}
-      onMore={handleMore}
-    />
+     {/* CONTENT WRAPPER (IMPORTANT FIX) */}
+<div className="mt-10 md:mt-6 px-0 md:px-0">
 
-    <Row
-      title="Popular"
-      movies={popular.slice(0, 15)}    // ✅ limit
-      onMovieClick={openMovie}
-      onMore={handleMore}
-    />
+  {activeTab === "home" && (
+    <div>
+      <Row title="Trending" movies={trending.slice(0, 15)} onMovieClick={openMovie} onMore={handleMore} />
+      <Row title="Popular" movies={popular.slice(0, 15)} onMovieClick={openMovie} onMore={handleMore} />
+      <Row title="Action" movies={action.slice(0, 15)} onMovieClick={openMovie} onMore={handleMore} />
+    </div>
+  )}
 
-    <Row
-      title="Action"
-      movies={action.slice(0, 15)}     // ✅ limit
-      onMovieClick={openMovie}
-      onMore={handleMore}
-    />
-
-  </div>
-)}
-{activeTab === "movies" && (
-  <Row
-    title="🎬 Movies"
-    movies={[
-      ...movies
-        .filter((m) => m.type === "Movie")
-        .sort((a, b) => Number(b.id) - Number(a.id))
-    ]}
+ {activeTab === "movies" && (
+  <Grid
+    title="Movies"
+    movies={movies
+      .filter((m) => m.type === "Movie")
+      .sort((a, b) => Number(b.id) - Number(a.id))}
     onMovieClick={openMovie}
   />
 )}
 
-{activeTab === "series" && (
-  <Row
-    title="📺 Series"
-    movies={[
-      ...movies
-        .filter((m) => m.type === "Series")
-        .sort((a, b) => Number(b.id) - Number(a.id))
-    ]}
+  {activeTab === "series" && (
+  <Grid
+    title="Series"
+    movies={movies
+      .filter((m) => m.type === "Series")
+      .sort((a, b) => Number(b.id) - Number(a.id))}
     onMovieClick={openMovie}
   />
 )}
 
-{activeTab === "anime" && (
-  <Row
-    title="🎌 Anime"
+  {activeTab === "anime" && (
+  <Grid
+    title="Anime"
     movies={anime}
     onMovieClick={openMovie}
   />
 )}
 
-{activeTab === "wishlist" && (
-  <Row
-  title="❤️ My Wishlist"
-  movies={wishlist}
-  onMovieClick={openMovie}
-/>
+  {activeTab === "wishlist" && (
+  <Grid
+    title="My Wishlist"
+    movies={wishlist}
+    onMovieClick={openMovie}
+  />
 )}
+
+</div>
 {videoUrl && (
   <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
 
