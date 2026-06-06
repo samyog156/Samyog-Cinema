@@ -458,7 +458,7 @@ useEffect(() => {
 
   {/* ================= MOBILE MENU ================= */}
   {menuOpen && (
-    <div className="absolute top-[60px] right-3 w-52 bg-black border border-white/10 rounded-lg z-[999]">
+    <div className="fixed top-[58px] right-3 w-52 bg-black border border-white/10 rounded-lg z-[99999]">
 
       {["home", "movies", "series", "anime", "wishlist"].map((tab) => (
         <button
@@ -479,7 +479,7 @@ useEffect(() => {
   )}
 
   {mobileSearchOpen && (
-  <div className="absolute top-[60px] left-0 w-full bg-black border-b border-white/10 p-3 z-[999]">
+  <div className="fixed top-[58px] left-0 w-full bg-black border-b border-white/10 p-3 z-[999]">
 
     {/* INPUT */}
     <input

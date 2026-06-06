@@ -122,23 +122,23 @@ export default function Watch() {
       <div className="w-full md:w-auto scale-[1.05] md:scale-100 origin-top">
 
         {/* ✅ MAIN / BACKUP SWITCH */}
-        {!useIframe ? (
-          <CustomVideoPlayer
-            key={movie.id}
-            ref={playerRef}
-            src={movie.videoUrl}
-          />
-        ) : (
-          <iframe
-  src={movie.backupIframe}
-  className="
-    w-[340px] h-[220px]
-    md:w-full md:h-[75vh]
-    rounded-lg
-    mx-auto
-  "
-  allowFullScreen
-/>
+      
+          {movie.videoUrl ? (
+  <CustomVideoPlayer
+    key={movie.id}
+    ref={playerRef}
+    src={movie.videoUrl}
+  />
+) : (
+  <iframe
+    src={movie.backupIframe}
+    className="
+      w-[340px] h-[220px]
+      md:w-full md:h-[75vh]
+      rounded-lg mx-auto
+    "
+    allowFullScreen
+  />
         )}
 
         {/* TITLE + BUTTONS */}

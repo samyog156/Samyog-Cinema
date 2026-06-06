@@ -71,6 +71,29 @@ const movies = [
 
   {
     id: "04",
+    title: "Love Insurance Kompany",
+    genre: ["romance","science","fiction","comedy","trending","hero"],
+    type: "Movie",
+
+    overview:
+      "In 2040, an app premised on ensuring romance for all is used widely by the population. When the voice behind the app's AI realizes its misconception to true love, he embarks on a quest to prove that love does not come from a screen.",
+
+    poster_path:
+      "https://www.themoviedb.org/t/p/w600_and_h900_face/1IIUWMKzNVvI6YJX8BKE6EJ9bVd.jpg",
+
+    backdrop_path:
+      "https://image.tmdb.org/t/p/original/PbSc8z95zr3G8eXqBoB6HbsiTH.jpg",
+
+    trailerId: "wMiCXl8ZybQ",
+
+    videoUrl: "",
+  
+  backupIframe: 
+      "https://minochinos.com/embed/s6jcbyctvpls",
+  },
+
+  {
+    id: "05",
     title: "Dhurandhar",
     genre: ["action","crime","trending","hero"],
     type: "Movie",
@@ -89,7 +112,7 @@ const movies = [
     videoUrl: "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaT8kbov69fetZl71gUhLtU6vFVCuJAlsLwlCS/Dhurandhar.2025.DS4K.720p.Hindi.WEB-DL.5.1.ESub.x264-.mkv",
   
   backupIframe: 
-      "https://minochinos.com/embed/53rj8l8axn78",
+      "https://minochinos.com/embed/709myjm7utmu",
   },
 ];
 
