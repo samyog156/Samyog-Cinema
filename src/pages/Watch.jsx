@@ -132,7 +132,7 @@ export default function Watch() {
           <iframe
   src={movie.backupIframe}
   className="
-    w-[310px] h-[200px]
+    w-[340px] h-[220px]
     md:w-full md:h-[75vh]
     rounded-lg
     mx-auto
@@ -142,7 +142,7 @@ export default function Watch() {
         )}
 
         {/* TITLE + BUTTONS */}
-        <div className="flex items-center justify-between mt-4 px-1 md:px-0">
+        <div className="flex items-start justify-between mt-3 md:mt-2 px-1 md:px-0">
 
           <div>
             <h1 className="text-2xl md:text-3xl font-bold">
