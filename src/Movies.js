@@ -114,6 +114,29 @@ const movies = [
   backupIframe: 
       "https://minochinos.com/embed/709myjm7utmu",
   },
+
+  {
+    id: "06",
+    title: "Dhurandhar:The Revenge",
+    genre: ["action","crime","trending","hero"],
+    type: "Movie",
+
+    overview:
+      "A mysterious traveler slips into the heart of Karachi's underbelly and rises through its ranks with lethal precision, only to tear the notorious ISI-Underworld nexus apart from within.",
+
+    poster_path:
+      "https://www.themoviedb.org/t/p/w600_and_h900_face/ov8vrRLZGoXHpYjSY9Vpv1tHJX7.jpg",
+
+    backdrop_path:
+      "https://image.tmdb.org/t/p/original/6MQXwFxmP3wczqb9ixBfIJZEmrG.jpg",
+
+    trailerId: "NHk7scrb_9I",
+
+    videoUrl: "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaTvUJwtgluPoGI24MoCv486PC7MeHgLIBS25V/Dhurandhar_The_Revenge_2026_720p_WEB_DL_DS4K_HINDI_x264_AAC_5_1.mkv",
+  
+  backupIframe: 
+      "https://minochinos.com/embed/lsj8es38h0ih",
+  },
 ];
 
 export default movies;

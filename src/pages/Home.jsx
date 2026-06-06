@@ -187,35 +187,27 @@ useEffect(() => {
     (a, b) => Number(b.id) - Number(a.id)
   );
 
-  setHero(
-    sortedMovies.filter((m) =>
-      m.genre?.includes("hero")
-    )
-  );
+  const heroMovies = sortedMovies
+    .filter((m) => m.genre?.includes("hero"))
+    .slice(0, 10); // ✅ only latest 10
+
+  setHero(heroMovies);
 
   setTrending(
-    sortedMovies.filter((m) =>
-      m.genre?.includes("trending")
-    )
+    sortedMovies.filter((m) => m.genre?.includes("trending"))
   );
 
   setPopular(
-    sortedMovies.filter((m) =>
-      m.genre?.includes("popular")
-    )
+    sortedMovies.filter((m) => m.genre?.includes("popular"))
   );
 
   setAction(
-    sortedMovies.filter((m) =>
-      m.genre?.includes("action")
-    )
+    sortedMovies.filter((m) => m.genre?.includes("action"))
   );
 
- setAnime(
-  sortedMovies.filter(
-    (m) => m.type?.toLowerCase() === "anime"
-  )
-);
+  setAnime(
+    sortedMovies.filter((m) => m.type?.toLowerCase() === "anime")
+  );
 }, []);
   
   // HERO AUTO SLIDE
@@ -641,21 +633,21 @@ style={{ backgroundImage: `url(${heroBg})` }}
     
     <Row
       title="Trending"
-      movies={trending}
+      movies={trending.slice(0, 15)}   // ✅ limit
       onMovieClick={openMovie}
       onMore={handleMore}
     />
 
     <Row
       title="Popular"
-      movies={popular}
+      movies={popular.slice(0, 15)}    // ✅ limit
       onMovieClick={openMovie}
       onMore={handleMore}
     />
 
     <Row
       title="Action"
-      movies={action}
+      movies={action.slice(0, 15)}     // ✅ limit
       onMovieClick={openMovie}
       onMore={handleMore}
     />
