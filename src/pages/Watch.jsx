@@ -7,11 +7,13 @@ import CustomVideoPlayer from "../CustomVideoPlayer";
 
 export default function Watch() {
   const { id } = useParams();
+  const movie = movies.find((m) => String(m.id) === String(id));
 
   const [wishlist, setWishlist] = useState([]);
   const [showPlayer, setShowPlayer] = useState(false);
   const playerRef = useRef(null);
   const [useIframe, setUseIframe] = useState(false);
+const [videoFailed, setVideoFailed] = useState(false);
 
   useEffect(() => {
     setWishlist(getWishlist());
@@ -23,7 +25,23 @@ export default function Watch() {
     };
   }, []);
 
-  const movie = movies.find((m) => String(m.id) === String(id));
+
+  useEffect(() => {
+  if (!showPlayer) return;
+  if (!movie.videoUrl) return;
+
+  const timer = setTimeout(() => {
+    const video = playerRef.current;
+
+    if (!video || video.readyState === 0) {
+      setVideoFailed(true);
+    }
+  }, 5000); // 5 sec check
+
+  return () => clearTimeout(timer);
+}, [showPlayer, movie.videoUrl]);
+
+  
 
   if (!movie)
     return <div className="text-white p-10">Movie not found</div>;
@@ -114,32 +132,33 @@ export default function Watch() {
         </div>
       )}
 
-      {/* ================= PLAYER ================= */}
-     {showPlayer && (
-  <div className="pt-1 px-0 md:px-6">
-    <div className="w-full max-w-[100vw] md:max-w-7xl mx-auto px-2 md:px-0">
+      
+     {/* ================= PLAYER ================= */}
+{showPlayer && (
+  <div className="pt-0 px-0 md:px-6">
+    <div className="w-full max-w-[100vw] md:max-w-7xl mx-auto px-6 md:px-0">
 
       <div className="w-full md:w-auto scale-[1.05] md:scale-100 origin-top">
 
-        {/* ✅ MAIN / BACKUP SWITCH */}
-      
-          {movie.videoUrl ? (
-  <CustomVideoPlayer
-    key={movie.id}
-    ref={playerRef}
-    src={movie.videoUrl}
-  />
-) : (
+        {/* PLAYER SWITCH LOGIC */}
+        {useIframe || videoFailed || !movie.videoUrl ? (
   <iframe
     src={movie.backupIframe}
     className="
-      w-[340px] h-[220px]
+      w-[310px] h-[220px]
       md:w-full md:h-[75vh]
       rounded-lg mx-auto
     "
     allowFullScreen
   />
-        )}
+) : (
+  <CustomVideoPlayer
+    key={movie.id}
+    ref={playerRef}
+    src={movie.videoUrl}
+    onError={() => setVideoFailed(true)}   // 👈 important
+  />
+)}
 
         {/* TITLE + BUTTONS */}
         <div className="flex items-start justify-between mt-3 md:mt-2 px-1 md:px-0">
@@ -149,15 +168,17 @@ export default function Watch() {
               {movie.title}
             </h1>
 
-            <p className="text-sm text-gray-400 mt-2">
-              If the video fails to load, try{" "}
-              <button
-                onClick={() => setUseIframe(true)}
-                className="text-red-500 font-semibold hover:underline"
-              >
-                backup player
-              </button>
-            </p>
+            {movie.backupIframe && (
+              <p className="text-sm text-gray-400 mt-2">
+                If the video fails, try{" "}
+                <button
+                  onClick={() => setUseIframe(true)}
+                  className="text-red-500 font-semibold hover:underline"
+                >
+                  backup player
+                </button>
+              </p>
+            )}
           </div>
 
           {/* Wishlist */}
@@ -175,7 +196,6 @@ export default function Watch() {
               setWishlist(updated);
               saveWishlist(updated);
             }}
-            className="text-white"
           >
             <Heart
               className={
@@ -189,8 +209,8 @@ export default function Watch() {
 
         </div>
 
-        {/* BACK BUTTON (optional) */}
-        {useIframe && (
+        {/* BACK BUTTON */}
+        {useIframe && movie.videoUrl && (
           <button
             onClick={() => setUseIframe(false)}
             className="mt-2 text-blue-400 text-sm hover:underline"
@@ -200,7 +220,6 @@ export default function Watch() {
         )}
 
       </div>
-
     </div>
   </div>
 )}
