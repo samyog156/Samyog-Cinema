@@ -871,7 +871,7 @@ style={{ backgroundImage: `url(${heroBg})` }}
 
       <button
         onClick={createProfile}
-        className="w-full mt-5 bg-red hover:bg-gray transition py-3 rounded-lg font-semibold"
+        className="w-full mt-5 bg-white text-black hover:bg-red-600 hover:text-white transition py-3 rounded-lg font-semibold"
       >
         Continue
       </button>

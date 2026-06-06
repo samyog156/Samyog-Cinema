@@ -38,7 +38,7 @@ export default function GenrePage() {
             <div className="relative rounded-md overflow-hidden shadow-md">
 
               {/* TYPE BADGE */}
-<div className="absolute top-2 left-2 z-10 bg-white text-black px-3 py-1 rounded text-xs font-bold">
+<div className="absolute top-2 left-2 z-10 bg-white text-black px-2 py-1 rounded text-[10px] font-bold">
   {m.type}
 </div>
 
