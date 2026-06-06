@@ -20,7 +20,7 @@ const movies = [
       "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaTvRYgYUsszUSzpuU5b84RZnICcAClPjpw6bF/Kara.2026.720p.DS4K.WEB-DL.Hindi.5.1-Tamil.5.1.ESub.x264-.mkv",
   
       backupIframe: 
-      "https://minochinos.com/embed/e0l7fl6v4203",
+      "https://abyssplayer.com/GkAylUDdL",
     },
 
   {
@@ -43,7 +43,7 @@ const movies = [
     videoUrl: "https://hubstream.sujanbotz.workers.dev/dl/1h9zhDkXTnMinD9NV93H2hJJkXYNxj8nnHHxWbV8OFIFwRmVZrIHP7RmGNrgqRo3dq8X7GtHqTKe/O.Romeo.2026.720p.Hindi.WEB.DL.5.1.ESub.x264.mkv",
   
   backupIframe: 
-      "https://minochinos.com/embed/2g7g0i7ynh7z",
+      "https://abyssplayer.com/nPpGhfhA1",
   },
 
   {
@@ -66,7 +66,7 @@ const movies = [
     videoUrl: "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaTvXFNWHSM9l6f8JeVMKz18IekbynEI4iqLEu/Ginny.Wedss.Sunny.2.2026.720p.AMZN.WEB.DL.Hindi.AAC2.0.H.264.mkv",
   
   backupIframe: 
-      "https://minochinos.com/embed/53rj8l8axn78",
+      "https://abyssplayer.com/UZDwpw5LO",
   },
 
   {
@@ -89,13 +89,13 @@ const movies = [
     videoUrl: "",
   
   backupIframe: 
-      "https://minochinos.com/embed/s6jcbyctvpls",
+      "https://abyssplayer.com/J38JDRpuH",
   },
 
   {
     id: "05",
     title: "Dhurandhar",
-    genre: ["action","crime","trending","hero"],
+    genre: ["action","crime","trending","hero","popular"],
     type: "Movie",
 
     overview:
@@ -112,13 +112,13 @@ const movies = [
     videoUrl: "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaT8kbov69fetZl71gUhLtU6vFVCuJAlsLwlCS/Dhurandhar.2025.DS4K.720p.Hindi.WEB-DL.5.1.ESub.x264-.mkv",
   
   backupIframe: 
-      "https://minochinos.com/embed/709myjm7utmu",
+      "https://abyssplayer.com/BpzFinS-C",
   },
 
   {
     id: "06",
     title: "Dhurandhar:The Revenge",
-    genre: ["action","crime","trending","hero"],
+    genre: ["action","crime","trending","hero","popular"],
     type: "Movie",
 
     overview:
@@ -135,7 +135,7 @@ const movies = [
     videoUrl: "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaTvUJwtgluPoGI24MoCv486PC7MeHgLIBS25V/Dhurandhar_The_Revenge_2026_720p_WEB_DL_DS4K_HINDI_x264_AAC_5_1.mkv",
   
   backupIframe: 
-      "https://minochinos.com/embed/lsj8es38h0ih",
+      "https://abyssplayer.com/ThT_3qXWB",
   },
 ];
 

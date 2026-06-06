@@ -135,89 +135,54 @@ const [videoFailed, setVideoFailed] = useState(false);
       
      {/* ================= PLAYER ================= */}
 {showPlayer && (
-  <div className="pt-0 px-0 md:px-6">
-    <div className="w-full max-w-[100vw] md:max-w-7xl mx-auto px-6 md:px-0">
+  <div className="pt-1 px-0 md:px-6">
+    <div className="w-full max-w-[100vw] md:max-w-7xl mx-auto px-2 md:px-0">
 
       <div className="w-full md:w-auto scale-[1.05] md:scale-100 origin-top">
 
-        {/* PLAYER SWITCH LOGIC */}
-        {useIframe || videoFailed || !movie.videoUrl ? (
-  <iframe
-    src={movie.backupIframe}
-    className="
-      w-[310px] h-[220px]
-      md:w-full md:h-[75vh]
-      rounded-lg mx-auto
-    "
-    allowFullScreen
-  />
-) : (
-  <CustomVideoPlayer
-    key={movie.id}
-    ref={playerRef}
-    src={movie.videoUrl}
-    onError={() => setVideoFailed(true)}   // 👈 important
-  />
-)}
+        {/* ================= PLAYER ================= */}
+        {!useIframe && movie.videoUrl ? (
+          <CustomVideoPlayer
+            key={movie.id}
+            src={movie.videoUrl}
+          />
+        ) : (
+          <iframe
+            src={movie.backupIframe}
+            className="
+              w-[340px] h-[220px]
+              md:w-full md:h-[75vh]
+              rounded-lg mx-auto
+            "
+            allowFullScreen
+          />
+        )}
 
-        {/* TITLE + BUTTONS */}
+        {/* ================= INFO + SWITCH BUTTON ================= */}
         <div className="flex items-start justify-between mt-3 md:mt-2 px-1 md:px-0">
+<div className="mt-3 md:mt-2 px-1 md:px-0">
 
-          <div>
-            <h1 className="text-2xl md:text-3xl font-bold">
-              {movie.title}
-            </h1>
+  {/* TITLE */}
+  <h1 className="text-2xl md:text-3xl font-bold">
+    {movie.title}
+  </h1>
 
-            {movie.backupIframe && (
-              <p className="text-sm text-gray-400 mt-2">
-                If the video fails, try{" "}
-                <button
-                  onClick={() => setUseIframe(true)}
-                  className="text-red-500 font-semibold hover:underline"
-                >
-                  backup player
-                </button>
-              </p>
-            )}
-          </div>
+  {/* BACKUP MESSAGE BELOW TITLE */}
+  <p className="text-sm text-gray-400 mt-2 flex items-center gap-1 flex-wrap">
+    If the video fails to load, try
+    <button
+      onClick={() => setUseIframe(!useIframe)}
+      className="text-red-500 font-semibold hover:underline"
+    >
+      backup player
+    </button>
+    .
+  </p>
+  
 
-          {/* Wishlist */}
-          <button
-            onClick={() => {
-              const current = getWishlist();
-              const exists = current.some(
-                (m) => String(m.id) === String(movie.id)
-              );
-
-              const updated = exists
-                ? current.filter((m) => String(m.id) !== String(movie.id))
-                : [...current, movie];
-
-              setWishlist(updated);
-              saveWishlist(updated);
-            }}
-          >
-            <Heart
-              className={
-                wishlist.some((m) => String(m.id) === String(movie.id))
-                  ? "text-white fill-white"
-                  : "text-white"
-              }
-              size={26}
-            />
-          </button>
+</div>
 
         </div>
-
-        {/* BACK BUTTON */}
-        {useIframe && movie.videoUrl && (
-          <button
-            onClick={() => setUseIframe(false)}
-            className="mt-2 text-blue-400 text-sm hover:underline"
-          >
-            ← Back to main player
-          </button>
-        )}
 
       </div>
     </div>
