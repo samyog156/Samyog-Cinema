@@ -313,7 +313,7 @@ useEffect(() => {
 
      {/* NAVBAR WRAPPER */}
      <div style={{ fontFamily: "Inter, sans-serif" }}></div>
-<div className="relative w-full z-50 bg-transparent">
+<div className="w-full bg-transparent">
 
   {/* ================= DESKTOP NAVBAR ================= */}
   <div className="hidden md:flex items-center w-full px-6 py-2 bg-transparent absolute top-0 left-0 z-50">
@@ -415,7 +415,7 @@ useEffect(() => {
   </div>
 
   {/* ================= MOBILE NAVBAR ================= */}
-  <div className="fixed top-0 left-0 w-full flex md:hidden items-center justify-between px-3 py-1 bg-transparent z-50">
+ <div className="fixed inset-x-0 top-0 h-[58px] flex md:hidden items-center justify-between px-3 bg-black/60 backdrop-blur-md z-[99999]">
 
     {/* LEFT */}
     <div className="flex items-center gap-3">
@@ -591,7 +591,7 @@ style={{ backgroundImage: `url(${heroBg})` }}
   </div>
 
   {/* ================= MOBILE HERO (OLD VERSION - KEEP AS IS) ================= */}
-  <div className="block md:hidden relative pt-[30px] h-[35vh] overflow-hidden">
+  <div className="block md:hidden relative mt-[30px] h-[35vh] overflow-hidden">
 
     {hero.map((item, i) => (
       <div
