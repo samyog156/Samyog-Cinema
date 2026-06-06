@@ -25,7 +25,7 @@ export default function GenrePage() {
       </div>
 
       {/* GRID (smaller cards) */}
-      <div className="px-6 py-6 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-3">
+      <div className="px-6 py-6 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-8 gap-2 md:gap-4 md:pt-8 md:pl-3">
 
         {movies.map((m) => (
           <div

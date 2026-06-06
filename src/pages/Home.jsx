@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { getWishlist, saveWishlist } from "../wishlist";
 import logo from "../assets/logo.png";
 import GenrePage from "./GenrePage";
-
+import heroBg from "../assets/hero-bg.jpg";
 
 
 import {
@@ -18,73 +18,93 @@ import {
 
 // MOVIE ROW
  const Row = ({ title, movies, onMovieClick, onMore }) => (
-    <div className="px-6  mt-0 md:mt-0 relative z-0">
+  <div className="px-4 md:px-6 mt-0 relative">
 
-      {/* ROW HEADER */}
-      <div className="flex items-center justify-between mb-4">
+    {/* ROW HEADER */}
+    <div className="flex items-center justify-between mb-4">
 
-        <h2 className="text-2xl font-bold border-l-4 border-red-600 pl-3"
-    style={{ fontFamily: "Inter, sans-serif" }}>
+      <h2
+  className="text-lg md:text-xl font-bold border-l-4 border-red-600 pl-3"
+  style={{ fontFamily: "Inter, sans-serif" }}
+>
   {title}
 </h2>
 
-        <button
-  onClick={() => onMore(title, movies)}
-  className="flex items-center gap-1 text-gray-400 hover:text-white text-sm"
->
-  More <ChevronRight size={16} />
-</button>
+      <button
+        onClick={() => onMore(title, movies)}
+        className="flex items-center gap-1 text-gray-400 hover:text-white text-sm"
+      >
+        More <ChevronRight size={16} />
+      </button>
 
-      </div>
-
-      {/* MOVIES */}
-      <div className="flex gap-4 overflow-x-auto overflow-y-visible scroll-smooth no-scrollbar pb-10 pt-4 pl-4 relative z-0">
-
-        {movies.map((m) => (
-          <div
-  key={m.id}
-  onClick={() => onMovieClick(m)}
-  className="min-w-[90px] md:min-w-[180px] cursor-pointer group relative z-10 transition-all duration-300 hover:scale-105 hover:-translate-y-2 shadow-2xl"
->
-
-  {/* IMAGE WRAPPER */}
-  <div className="relative rounded-lg overflow-hidden shadow-lg transition duration-300 group-hover:shadow-2xl">
-
-    {/* TYPE BADGE */}
-    <div className="absolute top-2 left-2 z-10 bg-white text-black px-2 py-1 rounded text-[10px] font-bold">
-      {m.type}
     </div>
 
-    {/* POSTER */}
-    <img
-  src={
-    m.poster_path?.startsWith("http")
-      ? m.poster_path
-      : "https://image.tmdb.org/t/p/w500" + m.poster_path
-  }
- className="
-    w-[110px] h-[165px]
-    md:w-[180px] md:h-[270px]
-    object-cover rounded-lg
-    transition-transform duration-300
-    group-hover:scale-105
-  "
-/>
+    {/* MOVIES */}
+    <div className="flex gap-2 md:gap-4 overflow-x-auto no-scrollbar pb-8 md:pt-2 md:pl-3">
+
+      {movies.map((m) => (
+        <div
+          key={m.id}
+          onClick={() => onMovieClick(m)}
+          className="
+  flex-shrink-0
+  w-[31%]
+  sm:w-[23%]
+  md:w-[135px]
+  lg:w-[145px]
+  xl:w-[155px]
+  cursor-pointer
+  group
+  relative
+  transition-all
+  duration-300
+  hover:scale-105
+  hover:-translate-y-2
+"
+        >
+
+          {/* IMAGE WRAPPER */}
+          <div className="relative rounded-lg overflow-hidden shadow-lg transition duration-300 group-hover:shadow-2xl">
+
+            {/* TYPE BADGE */}
+            <div className="absolute top-2 left-2 z-10 bg-white text-black px-2 py-1 rounded text-[10px] font-bold">
+              {m.type}
+            </div>
+
+            {/* POSTER */}
+            <img
+              src={
+                m.poster_path?.startsWith("http")
+                  ? m.poster_path
+                  : "https://image.tmdb.org/t/p/w500" + m.poster_path
+              }
+              className="
+                w-full
+                aspect-[2/3]
+                object-cover
+                transition-transform
+                duration-300
+                group-hover:scale-105
+              "
+            />
+
+            {/* HOVER OVERLAY */}
+            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition" />
+
+          </div>
+
+          {/* TITLE */}
+          <p className="mt-2 text-[12px] md:text-sm text-gray-300 line-clamp-1">
+            {m.title}
+          </p>
+
+        </div>
+      ))}
+
+    </div>
 
   </div>
-
-  {/* TITLE */}
-  <p className="mt-2 text-base font-medium text-gray-300 line-clamp-1">
-    {m.title}
-  </p>
-
-</div>
-        ))}
-
-      </div>
-
-    </div>
-  );
+);
 
 
 export default function Home() {
@@ -296,7 +316,7 @@ useEffect(() => {
 <div className="relative w-full z-50 bg-transparent">
 
   {/* ================= DESKTOP NAVBAR ================= */}
-  <div className="hidden md:flex items-center w-full px-6 py-4 bg-transparent absolute top-0 left-0 z-50">
+  <div className="hidden md:flex items-center w-full px-6 py-2 bg-transparent absolute top-0 left-0 z-50">
 
     {/* LEFT */}
     <div className="flex items-center gap-4">
@@ -395,7 +415,7 @@ useEffect(() => {
   </div>
 
   {/* ================= MOBILE NAVBAR ================= */}
-  <div className="fixed top-0 left-0 w-full flex md:hidden items-center justify-between px-4 py-3 border-b border-white/10 bg-transparent z-50">
+  <div className="fixed top-0 left-0 w-full flex md:hidden items-center justify-between px-3 py-1 bg-transparent z-50">
 
     {/* LEFT */}
     <div className="flex items-center gap-3">
@@ -467,7 +487,7 @@ useEffect(() => {
       placeholder="Search movies..."
       value={mobileSearchTerm}
       onChange={(e) => setMobileSearchTerm(e.target.value)}
-      className="w-full bg-white/10 px-3 py-2 rounded outline-none"
+      className="w-full bg-white/10 px-3 py-2 rounded outline-none border-0 focus:outline-none focus:ring-0 focus:border-transparent"
     />
 
     {/* SUGGESTIONS */}
@@ -512,62 +532,109 @@ useEffect(() => {
 
       </div>
 
-      {/* HERO SECTION */}
-      <div className="relative h-[28vh] md:h-[85vh] overflow-hidden">
+      {/* ================= HERO SECTION WRAPPER ================= */}
+<div className="relative">
 
-        {hero.map((item, i) => (
-          <div
-            key={item.id}
-            className="absolute w-full h-full transition-all duration-700 ease-in-out"
-            style={{
-              transform: `translateX(${(i - heroIndex) * 100}%)`,
-            }}
-          >
+  {/* ================= DESKTOP HERO (NEW VERSION) ================= */}
+  <div className="hidden md:block">
+    <div 
+      className="relative w-full h-[88vh] overflow-hidden bg-cover bg-center"
+style={{ backgroundImage: `url(${heroBg})` }}
+    >
+      <div className="absolute inset-0 bg-black/40" />
 
-            {/* HERO IMAGE */}
-           <img
-  src={"https://image.tmdb.org/t/p/original" + item.backdrop_path}
-  className="absolute inset-0 w-full h-full object-contain bg-black"
-/>
+      {hero.map((item, i) => (
+        <div
+          key={item.id}
+          className="absolute inset-0 w-full h-full flex items-center justify-between px-16 transition-transform duration-700 ease-in-out"
+          style={{
+            transform: `translateX(${(i - heroIndex) * 100}%)`,
+          }}
+        >
 
-            {/* OVERLAY */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent flex items-end px-10 pb-10">
+          {/* LEFT */}
+          <div className="w-[40%] z-10">
+            <div className="mb-3">
+  <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight inline">
+    {item.title}
+  </h1>
 
-              <div className="max-w-xl mt-14 md:mt-0">
+  <span className="ml-3 relative -top-2 inline-block bg-red-600 text-white px-2 py-1 text-xs font-bold rounded whitespace-nowrap">
+  {item.type}
+</span>
+</div>
 
-                <div className="flex items-center gap-3">
+            <p className="text-gray-300 mt-4 line-clamp-4">
+              {item.overview}
+            </p>
 
-  <h1 className="text-2xl md:text-5xl font-extrabold">
-  {item.title}
-</h1>
+            <button
+              onClick={() => openMovie(hero[heroIndex])}
+              className="mt-6 bg-white text-black px-6 py-2 rounded font-bold flex items-center gap-2 hover:bg-red-600 hover:text-white"
+            >
+              <Play size={18} />
+              Play Now
+            </button>
+          </div>
 
-  <div className="bg-white text-black px-2 py-1 rounded text-xs md:text-sm font-bold mt-3 md:mt-4">
-    {item.type}
+          {/* RIGHT */}
+          <div className="w-[56%] h-[70vh] z-10">
+            <img
+              src={"https://image.tmdb.org/t/p/original" + item.backdrop_path}
+              className="w-full h-full object-cover rounded-2xl shadow-2xl"
+            />
+          </div>
+
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* ================= MOBILE HERO (OLD VERSION - KEEP AS IS) ================= */}
+  <div className="block md:hidden relative pt-[30px] h-[35vh] overflow-hidden">
+
+    {hero.map((item, i) => (
+      <div
+        key={item.id}
+        className="absolute w-full h-full transition-all duration-700 ease-in-out"
+        style={{
+          transform: `translateX(${(i - heroIndex) * 100}%)`,
+        }}
+      >
+
+        <img
+          src={"https://image.tmdb.org/t/p/original" + item.backdrop_path}
+          className="absolute inset-0 w-full h-full object-contain bg-black"
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent flex items-end px-4 pb-10">
+
+          <div>
+            <div className="flex items-start gap-2">
+  <h1 className="text-lg font-extrabold leading-tight inline">
+    {item.title}
+  </h1>
+
+  <span className="relative top-0.8 bg-red-600 text-white px-2 py-0.5 rounded text-[10px] font-bold whitespace-nowrap">
+  {item.type}
+</span>
+</div>
+
+            <button
+  onClick={() => openMovie(hero[heroIndex])}
+  className="mt-3 bg-white text-black px-3 py-2 text-xs rounded flex items-center gap-2 font-semibold"
+>
+  <Play size={18} />
+  Play Now
+</button>
+          </div>
+
+        </div>
+      </div>
+    ))}
   </div>
 
 </div>
-
-                <p className="hidden md:block text-gray-300 text-sm mt-4">
-  {item.overview}
-</p>
-
-                <button
-  onClick={() => openMovie(hero[heroIndex])}
-  className="mt-4 md:mt-5 bg-white text-black hover:bg-gray-200 px-3 py-1.5 md:px-5 md:py-2 text-sm md:text-base rounded flex items-center gap-2 font-semibold transition"
->
-  <Play size={16} />
-  Play Now
-</button>
-
-              </div>
-
-            </div>
-
-          </div>
-        ))}
-
-      </div>
-
       {/* ROWS */}
      {activeTab === "home" && (
   <div className="mt-10 md:mt-5">
@@ -709,7 +776,7 @@ useEffect(() => {
               {/* WATCH TRAILER */}
               <button
   onClick={() => navigate(`/watch/${selected.id}`)}
-  className="bg-white text-black hover:bg-gray-200 px-5 py-2 rounded flex items-center gap-2 font-semibold"
+  className="bg-white text-black hover:bg-red-600 hover:text-white px-5 py-2 rounded flex items-center gap-2 font-semibold transition duration-300"
 >
   <Play size={18} />
   Play

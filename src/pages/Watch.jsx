@@ -16,12 +16,11 @@ export default function Watch() {
     setWishlist(getWishlist());
   }, []);
 
-useEffect(() => {
-  return () => {
-    setShowPlayer(false);
-  };
-}, []);
-
+  useEffect(() => {
+    return () => {
+      setShowPlayer(false);
+    };
+  }, []);
 
   const movie = movies.find((m) => String(m.id) === String(id));
 
@@ -33,37 +32,50 @@ useEffect(() => {
 
       {/* ================= HERO BACKDROP ================= */}
       {!showPlayer && (
-        <div className="relative w-full h-[60vh] md:h-[85vh]">
+        <div className="relative w-full h-[30vh] md:h-[100vh] overflow-hidden">
 
+          {/* BACKDROP IMAGE */}
           <img
             src={
               movie.backdrop_path?.startsWith("http")
                 ? movie.backdrop_path
-                : "https://image.tmdb.org/t/p/original" +
-                  movie.backdrop_path
+                : "https://image.tmdb.org/t/p/original" + movie.backdrop_path
             }
-            className="w-full h-full object-cover"
+            className="
+              absolute inset-0 w-full h-full object-contain bg-black
+              md:object-cover
+
+              /* ✅ MOBILE ONLY FIX */
+              object-[center_10%]
+            "
           />
 
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/40 flex items-end">
+          {/* HERO OVERLAY */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent flex items-end">
 
-            <div className="p-10 max-w-3xl">
+            <div className="
+              p-6 md:p-10 max-w-3xl
 
-              <h1 className="text-5xl font-extrabold mb-4">
+              /* ✅ MOBILE ONLY: slightly tighter spacing feel */
+              pb-4
+            ">
+
+              <h1 className="text-3xl md:text-5xl font-extrabold mb-3">
                 {movie.title}
               </h1>
 
               <p className="hidden md:block text-gray-300 max-w-xl mb-6">
-  {movie.overview}
-</p>
+                {movie.overview}
+              </p>
 
               <div className="flex items-center gap-4">
 
                 <button
-                  onClick={() => {
-  setShowPlayer(true);
-}}
-                  className="bg-white text-black px-6 py-2 rounded flex items-center gap-2 font-semibold hover:scale-105 transition"
+                  onClick={() => setShowPlayer(true)}
+                  className="
+                    bg-white text-black px-6 py-2 rounded flex items-center gap-2 font-semibold
+                    hover:bg-red-600 hover:text-white transition
+                  "
                 >
                   <Play size={18} />
                   Play
@@ -83,16 +95,67 @@ useEffect(() => {
                     setWishlist(updated);
                     saveWishlist(updated);
                   }}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 text-sm md:text-base"
                 >
                   <Heart
-  className={
-    wishlist.some((m) => String(m.id) === String(movie.id))
-      ? "text-white fill-white"
-      : "text-white"
-  }
-/>
+                    className={
+                      wishlist.some((m) => String(m.id) === String(movie.id))
+                        ? "text-white fill-white"
+                        : "text-white"
+                    }
+                  />
                   Wishlist
+                </button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ================= PLAYER ================= */}
+      {showPlayer && (
+        <div className="pt-1 px-0 md:px-6">
+          <div className="w-full max-w-[100vw] md:max-w-7xl mx-auto px-2 md:px-0">
+
+            <div className="w-full md:w-auto scale-[1.05] md:scale-100 origin-top">
+
+              <CustomVideoPlayer
+                key={movie.id}
+                ref={playerRef}
+                src={movie.videoUrl}
+              />
+
+              <div className="flex items-center justify-between mt-4 px-1 md:px-0">
+
+                <h1 className="text-2xl md:text-3xl font-bold">
+                  {movie.title}
+                </h1>
+
+                <button
+                  onClick={() => {
+                    const current = getWishlist();
+                    const exists = current.some(
+                      (m) => String(m.id) === String(movie.id)
+                    );
+
+                    const updated = exists
+                      ? current.filter((m) => String(m.id) !== String(movie.id))
+                      : [...current, movie];
+
+                    setWishlist(updated);
+                    saveWishlist(updated);
+                  }}
+                  className="text-white"
+                >
+                  <Heart
+                    className={
+                      wishlist.some((m) => String(m.id) === String(movie.id))
+                        ? "text-white fill-white"
+                        : "text-white"
+                    }
+                    size={26}
+                  />
                 </button>
 
               </div>
@@ -103,61 +166,6 @@ useEffect(() => {
         </div>
       )}
 
-      {/* ================= PLAYER ================= */}
-      {showPlayer && (
-  <div className="pt-1 px-0 md:px-6">
-    <div className="w-full max-w-[100vw] md:max-w-7xl mx-auto px-2 md:px-0">
-
-      <div className="w-full md:w-auto scale-[1.05] md:scale-100 origin-top">
-
-        <CustomVideoPlayer
-          key={movie.id}   // 🔥 IMPORTANT FIX
-          ref={playerRef}
-          src={movie.videoUrl}
-        />
-
-<div className="flex items-center justify-between mt-4 px-1 md:px-0">
-
-  {/* TITLE */}
-  <h1 className="text-2xl md:text-3xl font-bold">
-    {movie.title}
-  </h1>
-
-  {/* HEART */}
-  <button
-    onClick={() => {
-      const current = getWishlist();
-      const exists = current.some(
-        (m) => String(m.id) === String(movie.id)
-      );
-
-      const updated = exists
-        ? current.filter((m) => String(m.id) !== String(movie.id))
-        : [...current, movie];
-
-      setWishlist(updated);
-      saveWishlist(updated);
-    }}
-    className="text-white"
-  >
-    <Heart
-      className={
-        wishlist.some((m) => String(m.id) === String(movie.id))
-          ? "text-white fill-white"
-          : "text-white"
-      }
-      size={26}
-    />
-  </button>
-
-</div>
-
-      </div>
-
-    </div>
-  </div>
-)}
-
       {/* ================= SUGGESTIONS ================= */}
       <div className="max-w-7xl mx-auto px-6 mt-10">
 
@@ -165,7 +173,7 @@ useEffect(() => {
           You May Also Like
         </h2>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-4">
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-2 md:gap-4">
 
           {movies
             .filter(
@@ -177,38 +185,36 @@ useEffect(() => {
             )
             .slice(0, 12)
             .map((m) => (
-             <div
-  key={m.id}
-  className="cursor-pointer group relative transition-all duration-300 hover:scale-105 hover:-translate-y-2"
-  onClick={() => (window.location.href = `/watch/${m.id}`)}
->
+              <div
+                key={m.id}
+                className="cursor-pointer group relative transition-all duration-300 hover:scale-105 hover:-translate-y-2"
+                onClick={() => (window.location.href = `/watch/${m.id}`)}
+              >
 
-  {/* IMAGE WRAPPER */}
-  <div className="relative rounded-lg overflow-hidden shadow-lg transition duration-300 group-hover:shadow-2xl">
+                <div className="relative rounded-md overflow-hidden shadow-md">
 
-    {/* TYPE BADGE */}
-    <div className="absolute top-2 left-2 z-10 bg-white text-black px-2 py-1 rounded text-[10px] font-bold">
-      {m.type}
-    </div>
+                  <div className="absolute top-2 left-2 z-10 bg-white text-black px-2 py-1 rounded text-[10px] font-bold">
+                    {m.type}
+                  </div>
 
-    {/* POSTER */}
-    <img
-      src={
-        m.poster_path?.startsWith("http")
-          ? m.poster_path
-          : "https://image.tmdb.org/t/p/w500" + m.poster_path
-      }
-      className="w-full aspect-[2/3] object-cover transition-transform duration-300 group-hover:scale-105"
-    />
+                  <img
+                    src={
+                      m.poster_path?.startsWith("http")
+                        ? m.poster_path
+                        : "https://image.tmdb.org/t/p/w500" + m.poster_path
+                    }
+                    className="w-full aspect-[2/3] object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
 
-  </div>
+                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition" />
 
-  {/* TITLE */}
-  <p className="mt-2 text-sm text-gray-300 line-clamp-1">
-    {m.title}
-  </p>
+                </div>
 
-</div>
+                <p className="mt-1 text-[12px] md:text-sm text-gray-300 line-clamp-1">
+                  {m.title}
+                </p>
+
+              </div>
             ))}
 
         </div>
