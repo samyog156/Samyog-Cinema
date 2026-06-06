@@ -122,10 +122,10 @@ const movies = [
     type: "Movie",
 
     overview:
-      "A mysterious traveler slips into the heart of Karachi's underbelly and rises through its ranks with lethal precision, only to tear the notorious ISI-Underworld nexus apart from within.",
+      "As rival gangs, corrupt officials and a ruthless Major Iqbal close in, Hamza's mission for his country spirals into a bloody personal war where the line between patriot and monster disappears in the streets of Lyari.",
 
     poster_path:
-      "https://www.themoviedb.org/t/p/w600_and_h900_face/ov8vrRLZGoXHpYjSY9Vpv1tHJX7.jpg",
+      "https://image.tmdb.org/t/p/original/yfikYFZwy3IAq3qvCW77SNZoYI7.jpg",
 
     backdrop_path:
       "https://image.tmdb.org/t/p/original/6MQXwFxmP3wczqb9ixBfIJZEmrG.jpg",
