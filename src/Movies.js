@@ -18,7 +18,10 @@ const movies = [
 
     videoUrl:
       "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaTvRYgYUsszUSzpuU5b84RZnICcAClPjpw6bF/Kara.2026.720p.DS4K.WEB-DL.Hindi.5.1-Tamil.5.1.ESub.x264-.mkv",
-  },
+  
+      backupIframe: 
+      "https://minochinos.com/embed/e0l7fl6v4203",
+    },
 
   {
     id: "02",
@@ -38,6 +41,9 @@ const movies = [
     trailerId: "2M4hKmuBzUU",
 
     videoUrl: "https://hubstream.sujanbotz.workers.dev/dl/1h9zhDkXTnMinD9NV93H2hJJkXYNxj8nnHHxWbV8OFIFwRmVZrIHP7RmGNrgqRo3dq8X7GtHqTKe/O.Romeo.2026.720p.Hindi.WEB.DL.5.1.ESub.x264.mkv",
+  
+  backupIframe: 
+      "https://minochinos.com/embed/2g7g0i7ynh7z",
   },
 
   {
@@ -58,6 +64,9 @@ const movies = [
     trailerId: "8GYsnraCOrg",
 
     videoUrl: "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaTvXFNWHSM9l6f8JeVMKz18IekbynEI4iqLEu/Ginny.Wedss.Sunny.2.2026.720p.AMZN.WEB.DL.Hindi.AAC2.0.H.264.mkv",
+  
+  backupIframe: 
+      "https://minochinos.com/embed/53rj8l8axn78",
   },
 ];
 

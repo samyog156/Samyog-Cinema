@@ -11,6 +11,7 @@ export default function Watch() {
   const [wishlist, setWishlist] = useState([]);
   const [showPlayer, setShowPlayer] = useState(false);
   const playerRef = useRef(null);
+  const [useIframe, setUseIframe] = useState(false);
 
   useEffect(() => {
     setWishlist(getWishlist());
@@ -114,57 +115,96 @@ export default function Watch() {
       )}
 
       {/* ================= PLAYER ================= */}
-      {showPlayer && (
-        <div className="pt-1 px-0 md:px-6">
-          <div className="w-full max-w-[100vw] md:max-w-7xl mx-auto px-2 md:px-0">
+     {showPlayer && (
+  <div className="pt-1 px-0 md:px-6">
+    <div className="w-full max-w-[100vw] md:max-w-7xl mx-auto px-2 md:px-0">
 
-            <div className="w-full md:w-auto scale-[1.05] md:scale-100 origin-top">
+      <div className="w-full md:w-auto scale-[1.05] md:scale-100 origin-top">
 
-              <CustomVideoPlayer
-                key={movie.id}
-                ref={playerRef}
-                src={movie.videoUrl}
-              />
+        {/* ✅ MAIN / BACKUP SWITCH */}
+        {!useIframe ? (
+          <CustomVideoPlayer
+            key={movie.id}
+            ref={playerRef}
+            src={movie.videoUrl}
+          />
+        ) : (
+          <iframe
+  src={movie.backupIframe}
+  className="
+    w-[310px] h-[200px]
+    md:w-full md:h-[75vh]
+    rounded-lg
+    mx-auto
+  "
+  allowFullScreen
+/>
+        )}
 
-              <div className="flex items-center justify-between mt-4 px-1 md:px-0">
+        {/* TITLE + BUTTONS */}
+        <div className="flex items-center justify-between mt-4 px-1 md:px-0">
 
-                <h1 className="text-2xl md:text-3xl font-bold">
-                  {movie.title}
-                </h1>
+          <div>
+            <h1 className="text-2xl md:text-3xl font-bold">
+              {movie.title}
+            </h1>
 
-                <button
-                  onClick={() => {
-                    const current = getWishlist();
-                    const exists = current.some(
-                      (m) => String(m.id) === String(movie.id)
-                    );
-
-                    const updated = exists
-                      ? current.filter((m) => String(m.id) !== String(movie.id))
-                      : [...current, movie];
-
-                    setWishlist(updated);
-                    saveWishlist(updated);
-                  }}
-                  className="text-white"
-                >
-                  <Heart
-                    className={
-                      wishlist.some((m) => String(m.id) === String(movie.id))
-                        ? "text-white fill-white"
-                        : "text-white"
-                    }
-                    size={26}
-                  />
-                </button>
-
-              </div>
-
-            </div>
-
+            <p className="text-sm text-gray-400 mt-2">
+              If the video fails to load, try{" "}
+              <button
+                onClick={() => setUseIframe(true)}
+                className="text-red-500 font-semibold hover:underline"
+              >
+                backup player
+              </button>
+            </p>
           </div>
+
+          {/* Wishlist */}
+          <button
+            onClick={() => {
+              const current = getWishlist();
+              const exists = current.some(
+                (m) => String(m.id) === String(movie.id)
+              );
+
+              const updated = exists
+                ? current.filter((m) => String(m.id) !== String(movie.id))
+                : [...current, movie];
+
+              setWishlist(updated);
+              saveWishlist(updated);
+            }}
+            className="text-white"
+          >
+            <Heart
+              className={
+                wishlist.some((m) => String(m.id) === String(movie.id))
+                  ? "text-white fill-white"
+                  : "text-white"
+              }
+              size={26}
+            />
+          </button>
+
         </div>
-      )}
+
+        {/* BACK BUTTON (optional) */}
+        {useIframe && (
+          <button
+            onClick={() => setUseIframe(false)}
+            className="mt-2 text-blue-400 text-sm hover:underline"
+          >
+            ← Back to main player
+          </button>
+        )}
+
+      </div>
+
+    </div>
+  </div>
+)}
+      
 
       {/* ================= SUGGESTIONS ================= */}
       <div className="max-w-7xl mx-auto px-6 mt-10">
