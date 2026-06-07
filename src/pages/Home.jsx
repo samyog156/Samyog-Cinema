@@ -762,21 +762,22 @@ style={{ backgroundImage: `url(${heroBg})` }}
 )}
 
       {/* MODAL */}
-      {selected && (
-        <div className="fixed inset-0 bg-black/95 z-50 overflow-auto p-6">
+      
+       {selected && (
+  <div className="fixed inset-0 bg-black/95 z-50 overflow-auto p-6 flex items-start md:items-center justify-center pt-20 md:pt-6">
 
           {/* CLOSE */}
           <button
-            onClick={() => {
-              setSelected(null);
-              setTrailerKey(null);
-            }}
-            className="absolute top-5 right-5"
-          >
-            <X />
-          </button>
+  onClick={() => {
+    setSelected(null);
+    setTrailerKey(null);
+  }}
+  className="absolute top-14 right-5 md:top-6 md:right-80"
+>
+  <X size={22} />
+</button>
 
-          <div className="max-w-xl mx-auto px-4">
+          <div className="relative max-w-xl mx-auto px-4">
 
             {/* TRAILER */}
             {trailerKey ? (
@@ -805,8 +806,8 @@ style={{ backgroundImage: `url(${heroBg})` }}
 
             {/* OVERVIEW */}
             <p className="text-gray-300 mt-3">
-              {selected.overview}
-            </p>
+  {selected.overview}
+</p>
 
             {/* ACTIONS */}
             <div className="flex items-center gap-4 mt-5">
@@ -820,7 +821,7 @@ style={{ backgroundImage: `url(${heroBg})` }}
   Play
 </button>
               <button
-  onClick={() => setTrailerKey(selected.trailerId)}
+  onClick={() => setTrailerKey(selected.trailerId || null)}
   className="bg-gray-600 hover:bg-gray-700 px-5 py-2 rounded flex items-center gap-2"
 >
   <Play size={18} />

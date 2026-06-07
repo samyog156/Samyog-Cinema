@@ -5,19 +5,34 @@ import { useState, useEffect, useRef } from "react";
 import { getWishlist, saveWishlist } from "../wishlist";
 import CustomVideoPlayer from "../CustomVideoPlayer";
 
+
 export default function Watch() {
   const { id } = useParams();
   const movie = movies.find((m) => String(m.id) === String(id));
+  
 
   const [wishlist, setWishlist] = useState([]);
   const [showPlayer, setShowPlayer] = useState(false);
   const playerRef = useRef(null);
   const [useIframe, setUseIframe] = useState(false);
 const [videoFailed, setVideoFailed] = useState(false);
+const [showEpisodes, setShowEpisodes] = useState(false);
+const [selectedEpisode, setSelectedEpisode] = useState(null);
+const currentVideo =
+  movie.type === "Series"
+    ? selectedEpisode
+    : movie;
+
 
   useEffect(() => {
     setWishlist(getWishlist());
   }, []);
+
+  useEffect(() => {
+  if (movie?.type === "Series" && movie.episodes?.length) {
+    setSelectedEpisode(movie.episodes[0]);
+  }
+}, [movie]);
 
   useEffect(() => {
     return () => {
@@ -26,21 +41,7 @@ const [videoFailed, setVideoFailed] = useState(false);
   }, []);
 
 
-  useEffect(() => {
-  if (!showPlayer) return;
-  if (!movie.videoUrl) return;
-
-  const timer = setTimeout(() => {
-    const video = playerRef.current;
-
-    if (!video || video.readyState === 0) {
-      setVideoFailed(true);
-    }
-  }, 5000); // 5 sec check
-
-  return () => clearTimeout(timer);
-}, [showPlayer, movie.videoUrl]);
-
+  
   
 
   if (!movie)
@@ -132,46 +133,115 @@ const [videoFailed, setVideoFailed] = useState(false);
         </div>
       )}
 
-      
+      {showPlayer &&
+ movie.type === "Series" &&
+ movie.episodes?.length > 0 && (
+  <div className="absolute top-3 left-3 md:left-10 z-50">
+
+    {/* EPISODES BUTTON */}
+    <button
+      onClick={() =>
+        setShowEpisodes(!showEpisodes)
+      }
+      className="bg-black/80 backdrop-blur-md border border-white/10 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-600 transition"
+    >
+      Episodes
+    </button>
+
+    {/* DROPDOWN */}
+    {showEpisodes && (
+      <div className="mt-2 bg-black/95 border border-white/10 rounded-lg p-2 w-48 max-h-60 overflow-y-auto shadow-2xl">
+
+        {movie.episodes.map((ep) => (
+          <button
+            key={ep.ep}
+            onClick={() => {
+              setSelectedEpisode(ep);
+              setUseIframe(false);
+              setShowEpisodes(false);
+            }}
+            className={`w-full text-left px-3 py-2 rounded text-sm mb-1 transition ${
+              selectedEpisode?.ep === ep.ep
+                ? "bg-red-600 text-white"
+                : "hover:bg-white/10 text-gray-300"
+            }`}
+          >
+            Episode {ep.ep}
+          </button>
+        ))}
+
+      </div>
+    )}
+
+  </div>
+)}
+
      {/* ================= PLAYER ================= */}
 {showPlayer && (
   <div className="pt-1 px-0 md:px-6">
     <div className="w-full max-w-[100vw] md:max-w-7xl mx-auto px-2 md:px-0">
 
-      <div className="w-full md:w-auto scale-[1.05] md:scale-100 origin-top">
+      <div className="w-full md:w-auto scale-[1.05] md:scale-100 origin-top relative">
 
         {/* ================= PLAYER ================= */}
-        {!useIframe && movie.videoUrl ? (
-          <CustomVideoPlayer
-            key={movie.id}
-            src={movie.videoUrl}
-          />
-        ) : (
-          <iframe
-            src={movie.backupIframe}
-            className="
-              w-[340px] h-[220px]
-              md:w-full md:h-[75vh]
-              rounded-lg mx-auto
-            "
-            allowFullScreen
-          />
-        )}
+        {!useIframe && currentVideo?.videoUrl ? (
+  <CustomVideoPlayer
+    key={currentVideo.videoUrl}
+    src={currentVideo.videoUrl}
+  />
+) : (
+  <iframe
+    src={currentVideo?.backupIframe}
+    className="
+      w-[340px] h-[220px]
+      md:w-full md:h-[75vh]
+      rounded-lg mx-auto
+    "
+    allowFullScreen
+  />
+)}
 
         {/* ================= INFO + SWITCH BUTTON ================= */}
         <div className="flex items-start justify-between mt-3 md:mt-2 px-1 md:px-0">
 <div className="mt-3 md:mt-2 px-1 md:px-0">
 
   {/* TITLE */}
+  <div className="flex items-center justify-between gap-3">
   <h1 className="text-2xl md:text-3xl font-bold">
     {movie.title}
   </h1>
+
+  <button
+    onClick={() => {
+      const current = getWishlist();
+      const exists = current.some(
+        (m) => String(m.id) === String(movie.id)
+      );
+
+      const updated = exists
+        ? current.filter((m) => String(m.id) !== String(movie.id))
+        : [...current, movie];
+
+      setWishlist(updated);
+      saveWishlist(updated);
+    }}
+  >
+    <Heart
+      size={24}
+      className={
+        wishlist.some((m) => String(m.id) === String(movie.id))
+          ? "text-white fill-white"
+          : "text-white"
+      }
+    />
+  </button>
+</div>
 
   {/* BACKUP MESSAGE BELOW TITLE */}
   <p className="text-sm text-gray-400 mt-2 flex items-center gap-1 flex-wrap">
     If the video fails to load, try
     <button
-      onClick={() => setUseIframe(!useIframe)}
+      onClick={() => setUseIframe(true)}
       className="text-red-500 font-semibold hover:underline"
     >
       backup player
@@ -181,6 +251,7 @@ const [videoFailed, setVideoFailed] = useState(false);
   
 
 </div>
+
 
         </div>
 
