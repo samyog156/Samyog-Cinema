@@ -244,7 +244,7 @@ const movies = [
       "https://www.themoviedb.org/t/p/w600_and_h900_face/530ELGtiZKTUpyxEvP2ufzz8bJB.jpg",
 
     backdrop_path:
-      "https://image.tmdb.org/t/p/original/wwYjrKkj7tLSYIjje0QGpDMZiWH.jpg",
+      "https://image.tmdb.org/t/p/original/xiygh1obva8ieo7cxXmpLbA2e7K.jpg",
 
     trailerId: "y0eE5efgRV8",
 

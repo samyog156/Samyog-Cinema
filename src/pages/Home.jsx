@@ -634,7 +634,7 @@ style={{ backgroundImage: `url(${heroBg})` }}
           </div>
 
           {/* RIGHT */}
-          <div className="w-[56%] h-[70vh] z-10">
+          <div className="w-[60%] h-[70vh] z-10">
             <img
               src={"https://image.tmdb.org/t/p/original" + item.backdrop_path}
               className="w-full h-full object-cover rounded-2xl shadow-2xl"
