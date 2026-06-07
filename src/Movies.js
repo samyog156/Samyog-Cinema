@@ -47,7 +47,7 @@ const movies = [
   },
 
   {
-    id: "03",
+    id: "05",
     title: "Ginny Wedss Sunny 2",
     genre: ["romance","drama","trending","hero"],
     type: "Movie",
@@ -93,7 +93,7 @@ const movies = [
   },
 
   {
-    id: "06",
+    id: "03",
     title: "Dhurandhar",
     genre: ["action","crime","trending","hero","popular"],
     type: "Movie",
@@ -116,7 +116,7 @@ const movies = [
   },
 
   {
-    id: "07",
+    id: "06",
     title: "Dhurandhar:The Revenge",
     genre: ["action","crime","trending","hero","popular"],
     type: "Movie",
@@ -232,7 +232,7 @@ const movies = [
   },
 
   {
-    id: "05",
+    id: "07",
     title: "Dacoit",
     genre: ["action","romance","thriller","hero",],
     type: "Movie",
@@ -244,7 +244,7 @@ const movies = [
       "https://www.themoviedb.org/t/p/w600_and_h900_face/530ELGtiZKTUpyxEvP2ufzz8bJB.jpg",
 
     backdrop_path:
-      "https://image.tmdb.org/t/p/original/xiygh1obva8ieo7cxXmpLbA2e7K.jpg",
+      "https://image.tmdb.org/t/p/original/wwYjrKkj7tLSYIjje0QGpDMZiWH.jpg",
 
     trailerId: "y0eE5efgRV8",
 
