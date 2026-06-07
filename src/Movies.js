@@ -142,9 +142,9 @@ const movies = [
     id: "-12", 
     title: "Money Heist Season 1",
     type: "Series",
-    genre: ["crime", "popular", "action"],
+    genre: ["crime", "popular", ""],
   overview: "To carry out the biggest heist in history, a mysterious man called The Professor recruits a band of eight robbers who have a single characteristic: none of them has anything to lose. Five months of seclusion - memorizing every step, every detail, every probability - culminate in eleven days locked up in the National Coinage and Stamp Factory of Spain, surrounded by police forces and with dozens of hostages in their power, to find out whether their suicide wager will lead to everything or nothing.",
-    trailerId: "_InqQJRqGW4",
+    trailerId: "F3NYYVle3_E",
   
   poster_path: "https://image.tmdb.org/t/p/original/tfc5L5zhJhn3NLXss29HMD3lnTC.jpg",
     backdrop_path: "https://image.tmdb.org/t/p/original/2f92nfDnutSdrqEfwiZcOFWuNLH.jpg",
