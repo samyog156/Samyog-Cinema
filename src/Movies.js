@@ -93,7 +93,7 @@ const movies = [
   },
 
   {
-    id: "05",
+    id: "06",
     title: "Dhurandhar",
     genre: ["action","crime","trending","hero","popular"],
     type: "Movie",
@@ -116,7 +116,7 @@ const movies = [
   },
 
   {
-    id: "06",
+    id: "07",
     title: "Dhurandhar:The Revenge",
     genre: ["action","crime","trending","hero","popular"],
     type: "Movie",
@@ -229,6 +229,29 @@ const movies = [
         backupIframe: "https://abyssplayer.com/KaVCOgvln"
       }
     ]
+  },
+
+  {
+    id: "05",
+    title: "Dacoit",
+    genre: ["action","romance","thriller","hero",],
+    type: "Movie",
+
+    overview:
+      "Betrayed by his better half, a man is convicted for a crime he didn't commit. Once free, he hunts her down in pursuit of vengeance, as their stories intertwine with a series of robberies.",
+
+    poster_path:
+      "https://www.themoviedb.org/t/p/w600_and_h900_face/530ELGtiZKTUpyxEvP2ufzz8bJB.jpg",
+
+    backdrop_path:
+      "https://image.tmdb.org/t/p/original/xiygh1obva8ieo7cxXmpLbA2e7K.jpg",
+
+    trailerId: "y0eE5efgRV8",
+
+    videoUrl: "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaTvXFOhBBbWG2QrjY0XiYCM8e1jZW169yR3J9/Dacoit-Ek.Prem.Katha.2026.720p.Hindi.DS4K.WEB-DL.5.1.ESub.x2.mkv",
+  
+  backupIframe: 
+      "https://abyssplayer.com/5VMmJ0LEx",
   },
 
 ];
