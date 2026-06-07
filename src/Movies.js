@@ -254,6 +254,28 @@ const movies = [
       "https://abyssplayer.com/5VMmJ0LEx",
   },
 
+  {
+    id: "-1",
+    title: "Veera Dheera Sooran 2",
+    genre: ["action","drama","crime","thriller","hero",],
+    type: "Movie",
+
+    overview:
+      "Kaali is a provision store owner and a loving husband and father, is brought back into the life of crime, when his former boss's son is being hunted by the police.",
+
+    poster_path:
+      "https://www.themoviedb.org/t/p/w600_and_h900_face/6iiWsXJ31BVbypWwzvoPKx24NFQ.jpg",
+
+    backdrop_path:
+      "https://image.tmdb.org/t/p/original/hEXUewcriiGBzUhGlwsMslrWKyR.jpg",
+
+    trailerId: "rnoNaAb7gv4",
+
+    videoUrl: "",
+  
+  backupIframe: 
+      "https://abyssplayer.com/JVVLEiNhf",
+  },
 ];
 
 export default movies;
