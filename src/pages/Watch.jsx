@@ -240,16 +240,44 @@ const currentVideo =
 </div>
 
   {/* BACKUP MESSAGE BELOW TITLE */}
-  <p className="text-sm text-gray-400 mt-2 flex items-center gap-1 flex-wrap">
-    If the video fails to load, try
-    <button
-      onClick={() => setUseIframe(true)}
-      className="text-red-500 font-semibold hover:underline"
-    >
-      backup player
-    </button>
-    .
-  </p>
+<div className="text-sm text-gray-400 mt-2 flex items-center gap-1 flex-wrap">
+
+  {/* AUTO BACKUP MODE */}
+  {!currentVideo?.videoUrl ? (
+    <>
+      <span className="text-red-500 font-semibold">
+        Playing Backup Player
+      </span>
+    </>
+  ) : useIframe ? (
+    
+    /* MANUAL BACKUP SWITCH */
+    <>
+      <span>Using backup player.</span>
+
+      <button
+        onClick={() => setUseIframe(false)}
+        className="text-blue-500 font-semibold hover:underline"
+      >
+        Switch to main player
+      </button>
+    </>
+  ) : (
+    
+    /* MAIN PLAYER MODE */
+    <>
+      <span>If the video fails to load, try</span>
+
+      <button
+        onClick={() => setUseIframe(true)}
+        className="text-red-500 font-semibold hover:underline"
+      >
+        backup player
+      </button>
+      .
+    </>
+  )}
+</div>
   
 
 </div>
