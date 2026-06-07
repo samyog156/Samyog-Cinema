@@ -13,6 +13,10 @@ import {
   ChevronRight,
   Heart,
   X,
+  House,
+  Tv,
+  Film,
+  Flame,
 } from "lucide-react";
 
 
@@ -195,6 +199,7 @@ const [anime, setAnime] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("home");
   const [videoUrl, setVideoUrl] = useState(null);
+  const [genres, setGenres] = useState([]);
 
   const navigate = useNavigate();
 
@@ -272,6 +277,23 @@ useEffect(() => {
   setAnime(
     sortedMovies.filter((m) => m.type?.toLowerCase() === "anime")
   );
+
+  // AUTO EXTRACT GENRES
+const excludedGenres = ["hero", "trending", "popular"];
+
+const extractedGenres = [
+  ...new Set(
+    sortedMovies.flatMap((m) => m.genre || [])
+  ),
+]
+  .filter(
+    (g) =>
+      g &&
+      !excludedGenres.includes(g.toLowerCase())
+  )
+  .sort((a, b) => a.localeCompare(b));
+
+setGenres(extractedGenres);
 }, []);
   
   // HERO AUTO SLIDE
@@ -363,7 +385,7 @@ useEffect(() => {
   setSearchResults(results.slice(0, 8)); // limit suggestions
 }, [searchTerm, trending, popular, action]);
   return (
-    <div className="bg-black text-white min-h-screen w-full overflow-x-hidden">
+    <div className="bg-black text-white min-h-screen w-full overflow-x-hidden pb-[75px] md:pb-0">
 
 
 
@@ -512,27 +534,33 @@ useEffect(() => {
 
   </div>
 
-  {/* ================= MOBILE MENU ================= */}
-  {menuOpen && (
-    <div className="fixed top-[58px] right-3 w-52 bg-black border border-white/10 rounded-lg z-[99999]">
+ {/* ================= MOBILE MENU ================= */}
+{menuOpen && (
+  <div className="fixed top-[58px] right-3 w-52 bg-black border border-white/10 rounded-lg z-[99999]">
 
-      {["home", "movies", "series", "anime", "wishlist"].map((tab) => (
-        <button
-          key={tab}
-          onClick={() => {
-            setActiveTab(tab);
-            setMenuOpen(false);
-          }}
-          className={`w-full text-left px-4 py-3 capitalize hover:bg-white/10 ${
-            activeTab === tab ? "text-red-500" : "text-white"
-          }`}
-        >
-          {tab.charAt(0).toUpperCase() + tab.slice(1)}
-        </button>
-      ))}
-
+    <div className="px-4 py-2 text-xs text-gray-500 uppercase tracking-widest border-b border-white/10">
+      Genres
     </div>
-  )}
+
+    {genres.map((tab) => (
+      <button
+        key={tab}
+        onClick={() => {
+          setActiveTab(tab.toLowerCase());
+          setMenuOpen(false);
+        }}
+        className={`w-full text-left px-4 py-3 capitalize hover:bg-white/10 ${
+          activeTab === tab.toLowerCase()
+            ? "text-red-500"
+            : "text-white"
+        }`}
+      >
+        {tab}
+      </button>
+    ))}
+
+  </div>
+)}
 
   {mobileSearchOpen && (
   <div className="fixed top-[58px] left-0 w-full bg-black border-b border-white/10 p-3 z-[999]">
@@ -919,6 +947,86 @@ style={{ backgroundImage: `url(${heroBg})` }}
 
   </div>
 )}
+
+{/* ================= MOBILE BOTTOM NAVBAR ================= */}
+<div className="fixed bottom-0 left-0 w-full h-[65px] bg-black/95 border-t border-white/10 flex md:hidden items-center justify-around z-[99999] backdrop-blur-md">
+
+  {/* HOME */}
+  <button
+    onClick={() => setActiveTab("home")}
+    className={`flex flex-col items-center text-[11px] ${
+      activeTab === "home"
+        ? "text-white"
+        : "text-gray-400"
+    }`}
+  >
+    <House size={18} strokeWidth={1.8} />
+    <span className="mt-1">Home</span>
+  </button>
+
+  {/* SERIES */}
+  <button
+    onClick={() => setActiveTab("series")}
+    className={`flex flex-col items-center text-[11px] ${
+      activeTab === "series"
+        ? "text-white"
+        : "text-gray-400"
+    }`}
+  >
+    <Tv size={18} strokeWidth={1.8} />
+    <span className="mt-1">Series</span>
+  </button>
+
+  {/* MOVIES */}
+  <button
+    onClick={() => setActiveTab("movies")}
+    className={`flex flex-col items-center text-[11px] ${
+      activeTab === "movies"
+        ? "text-white"
+        : "text-gray-400"
+    }`}
+  >
+    <Film size={18} strokeWidth={1.8} />
+    <span className="mt-1">Movies</span>
+  </button>
+
+  {/* ANIME */}
+  <button
+    onClick={() => setActiveTab("anime")}
+    className={`flex flex-col items-center text-[11px] ${
+      activeTab === "anime"
+        ? "text-white"
+        : "text-gray-400"
+    }`}
+  >
+    <Flame size={18} strokeWidth={1.8} />
+    <span className="mt-1">Anime</span>
+  </button>
+
+  {/* WISHLIST */}
+  {/* WISHLIST */}
+<button
+  onClick={() => setActiveTab("wishlist")}
+  className={`flex flex-col items-center text-[11px] -mt-0 ${
+    activeTab === "wishlist"
+      ? "text-white"
+      : "text-gray-400"
+  }`}
+>
+  <Heart
+    size={18}
+    strokeWidth={1.8}
+    className={
+      activeTab === "wishlist"
+        ? "fill-white text-white"
+        : "text-gray-400"
+    }
+  />
+
+  <span className="mt-[2px]">Wishlist</span>
+</button>
+</div>
     </div>
   );
 }
+
