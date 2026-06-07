@@ -28,3 +28,36 @@ body,
   -ms-overflow-style: none;  /* IE/Edge */
   scrollbar-width: none;     /* Firefox */
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none !important;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+.custom-vertical-slider {
+  scrollbar-width: thin;              /* Firefox */
+  scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+
+/* Chrome / Edge / Safari */
+.custom-vertical-slider::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-vertical-slider::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-vertical-slider::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.custom-vertical-slider::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 0, 0, 0.7);
+}

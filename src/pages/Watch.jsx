@@ -150,27 +150,29 @@ const currentVideo =
 
     {/* DROPDOWN */}
     {showEpisodes && (
-      <div className="mt-2 bg-black/95 border border-white/10 rounded-lg p-2 w-48 max-h-60 overflow-y-auto shadow-2xl">
+      <div className="mt-2 bg-black/95 border border-white/10 rounded-lg p-2 w-48 shadow-2xl">
 
-        {movie.episodes.map((ep) => (
-          <button
-            key={ep.ep}
-            onClick={() => {
-              setSelectedEpisode(ep);
-              setUseIframe(false);
-              setShowEpisodes(false);
-            }}
-            className={`w-full text-left px-3 py-2 rounded text-sm mb-1 transition ${
-              selectedEpisode?.ep === ep.ep
-                ? "bg-red-600 text-white"
-                : "hover:bg-white/10 text-gray-300"
-            }`}
-          >
-            Episode {ep.ep}
-          </button>
-        ))}
+  <div className="max-h-56 overflow-y-auto pr-2 custom-vertical-slider">
+  {movie.episodes.map((ep) => (
+    <button
+      key={ep.ep}
+      onClick={() => {
+        setSelectedEpisode(ep);
+        setUseIframe(false);
+        setShowEpisodes(false);
+      }}
+      className={`w-full text-left px-3 py-2 rounded-md text-sm mb-1 transition ${
+        selectedEpisode?.ep === ep.ep
+          ? "bg-red-600 text-white"
+          : "bg-white/10 text-gray-300 hover:bg-white/20"
+      }`}
+    >
+      Episode {ep.ep}
+    </button>
+  ))}
+</div>
 
-      </div>
+</div>
     )}
 
   </div>
