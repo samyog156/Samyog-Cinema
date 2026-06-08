@@ -280,7 +280,7 @@ const movies = [
   {
     id: "-1",
     title: "12th Fail",
-    genre: ["drama","hero",],
+    genre: ["popular","drama","hero",],
     type: "Movie",
 
     overview:
