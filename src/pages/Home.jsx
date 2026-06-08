@@ -776,7 +776,7 @@ style={{ backgroundImage: `url(${heroBg})` }}
     setSelected(null);
     setTrailerKey(null);
   }}
-  className="absolute top-14 right-5 md:top-6 md:right-80"
+  className="absolute top-14 right-5 md:top-7 md:right-80"
 >
   <X size={22} />
 </button>
