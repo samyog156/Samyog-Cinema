@@ -17,7 +17,7 @@ const movies = [
     trailerId: "CzofKTEj404",
 
     videoUrl:
-      "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaTvRYgYUsszUSzpuU5b84RZnICcAClPjpw6bF/Kara.2026.720p.DS4K.WEB-DL.Hindi.5.1-Tamil.5.1.ESub.x264-.mkv",
+      "https://ia800500.us.archive.org/34/items/kara.-2026.1080p.-hevc.-ds-4-k.-web-dl.-hindi.-5.1-tamil.-5.1.-esub.x-265-hdhub-4u.-ms/Kara.2026.1080p.HEVC.DS4K.WEB-DL.Hindi.5.1-Tamil.5.1.ESub.x265-HDHub4u.Ms.mp4",
   
       backupIframe: 
       "https://abyssplayer.com/GkAylUDdL",
@@ -132,7 +132,7 @@ const movies = [
 
     trailerId: "NHk7scrb_9I",
 
-    videoUrl: "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaTvUJwtgluPoGI24MoCv486PC7MeHgLIBS25V/Dhurandhar_The_Revenge_2026_720p_WEB_DL_DS4K_HINDI_x264_AAC_5_1.mkv",
+    videoUrl: "https://ia600100.us.archive.org/25/items/dhurandhar-the.-revenge.-2026.720p.-hevc.-hindi.-ds-4-k.-web-dl.-esub.x-265-hdhub-4u.-ag/Dhurandhar-The.Revenge.2026.720p.HEVC.Hindi.DS4K.WEB-DL.ESub.x265-HDHub4u.Ag.mp4",
   
   backupIframe: 
       "https://abyssplayer.com/2ozhGJD6E",
