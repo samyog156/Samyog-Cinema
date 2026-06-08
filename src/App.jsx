@@ -3,7 +3,6 @@ import Home from "./pages/Home";
 import Watch from "./pages/Watch";
 import { useEffect, useState } from "react";
 import GenrePage from "./pages/GenrePage";
-import Genre from "./pages/Genre";
 
 export default function App() {
   const [wishlist, setWishlist] = useState([]);
@@ -30,7 +29,7 @@ const toggleWishlist = (movie) => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/genre/:title" element={<GenrePage />} />
-      <Route path="/genre/:name" element={<Genre />} />
+
       <Route
   path="/watch/:id"
   element={

@@ -199,7 +199,6 @@ const [anime, setAnime] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("home");
   const [videoUrl, setVideoUrl] = useState(null);
-  const [genres, setGenres] = useState([]);
 
   const navigate = useNavigate();
 
@@ -277,23 +276,6 @@ useEffect(() => {
   setAnime(
     sortedMovies.filter((m) => m.type?.toLowerCase() === "anime")
   );
-
-  // AUTO EXTRACT GENRES
-const excludedGenres = ["hero", "trending", "popular"];
-
-const extractedGenres = [
-  ...new Set(
-    sortedMovies.flatMap((m) => m.genre || [])
-  ),
-]
-  .filter(
-    (g) =>
-      g &&
-      !excludedGenres.includes(g.toLowerCase())
-  )
-  .sort((a, b) => a.localeCompare(b));
-
-setGenres(extractedGenres);
 }, []);
   
   // HERO AUTO SLIDE
@@ -534,33 +516,27 @@ useEffect(() => {
 
   </div>
 
- {/* ================= MOBILE MENU ================= */}
-{menuOpen && (
-  <div className="fixed top-[58px] right-3 w-52 bg-black border border-white/10 rounded-lg z-[99999]">
+  {/* ================= MOBILE MENU ================= */}
+  {menuOpen && (
+    <div className="fixed top-[58px] right-3 w-52 bg-black border border-white/10 rounded-lg z-[99999]">
 
-    <div className="px-4 py-2 text-xs text-gray-500 uppercase tracking-widest border-b border-white/10">
-      Genres
+      {["home", "movies", "series", "anime", "wishlist"].map((tab) => (
+        <button
+          key={tab}
+          onClick={() => {
+            setActiveTab(tab);
+            setMenuOpen(false);
+          }}
+          className={`w-full text-left px-4 py-3 capitalize hover:bg-white/10 ${
+            activeTab === tab ? "text-red-500" : "text-white"
+          }`}
+        >
+          {tab.charAt(0).toUpperCase() + tab.slice(1)}
+        </button>
+      ))}
+
     </div>
-
-    {genres.map((tab) => (
-      <button
-        key={tab}
-        onClick={() => {
-          setActiveTab(tab.toLowerCase());
-          setMenuOpen(false);
-        }}
-        className={`w-full text-left px-4 py-3 capitalize hover:bg-white/10 ${
-          activeTab === tab.toLowerCase()
-            ? "text-red-500"
-            : "text-white"
-        }`}
-      >
-        {tab}
-      </button>
-    ))}
-
-  </div>
-)}
+  )}
 
   {mobileSearchOpen && (
   <div className="fixed top-[58px] left-0 w-full bg-black border-b border-white/10 p-3 z-[999]">
@@ -1003,7 +979,7 @@ style={{ backgroundImage: `url(${heroBg})` }}
     <span className="mt-1">Anime</span>
   </button>
 
-  {/* WISHLIST */}
+  
   {/* WISHLIST */}
 <button
   onClick={() => setActiveTab("wishlist")}

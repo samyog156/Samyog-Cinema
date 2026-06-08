@@ -132,7 +132,7 @@ const movies = [
 
     trailerId: "NHk7scrb_9I",
 
-    videoUrl: "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaTvUJwtgluPoGI24MoCv486PC7MeHgLIBS25V/Dhurandhar_The_Revenge_2026_720p_WEB_DL_DS4K_HINDI_x264_AAC_5_1.mkv",
+    videoUrl: "https://archive.org/download/dhurandhar-the.-revenge.-2026.720p.-hevc.-hindi.-ds-4-k.-web-dl.-esub.x-265-hdhub-4u.-ag/Dhurandhar-The.Revenge.2026.720p.HEVC.Hindi.DS4K.WEB-DL.ESub.x265-HDHub4u.Ag.mkv",
   
   backupIframe: 
       "https://abyssplayer.com/yQ21Ah1Hv",
@@ -154,7 +154,7 @@ const movies = [
         ep: 1,
         title: "Episode 1",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/7mneCZwdb"
+        backupIframe: "https://abyssplayer.com/F9ZaFGHIGI"
       },
       {
         ep: 2,
@@ -172,7 +172,7 @@ const movies = [
         ep: 4,
         title: "Episode 4",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/9OaNHpOl9"
+        backupIframe: "https://abyssplayer.com/R-dbvC0g7"
       },
       {
         ep: 5,
