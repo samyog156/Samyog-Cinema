@@ -545,7 +545,7 @@ const movies = [
     id: "-2", 
     title: "If Wishes Could Kill",
     type: "Series",
-    genre: ["mystry", "drama", "hero"],
+    genre: ["mystry", "drama", "trending","hero"],
   overview: "A mysterious app promises wishes — then starts a countdown to death. As a group of teens becomes entangled, they must break the deadly chain to survive.",
     trailerId: "F7X6BuNgaOk",
   
