@@ -204,7 +204,7 @@ const [anime, setAnime] = useState([]);
 
   const navigate = useNavigate();
   const allGenres = [...new Set(movies.flatMap((m) => m.genre || []))]
-  .filter((g) => !["hero", "trending", "popular", "action"].includes(g))
+  .filter((g) => !["hero", "trending", "popular"].includes(g))
   .sort();
 
 const handleMore = (title, moviesList) => {
@@ -525,6 +525,11 @@ useEffect(() => {
 {menuOpen && (
   <div className="fixed top-[58px] right-3 w-52 bg-black border border-white/10 rounded-lg z-[99999] max-h-[70vh] overflow-y-auto">
 
+    {/* HEADING */}
+    <div className="px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-widest border-b border-white/10">
+      Genres
+    </div>
+
     {allGenres.map((genre) => (
       <button
         key={genre}
@@ -533,7 +538,10 @@ useEffect(() => {
             .filter((m) => m.genre?.includes(genre))
             .sort((a, b) => Number(b.id) - Number(a.id));
           navigate(`/genre/${genre}`, {
-            state: { movies: filtered, title: genre.charAt(0).toUpperCase() + genre.slice(1) }
+            state: {
+              movies: filtered,
+              title: genre.charAt(0).toUpperCase() + genre.slice(1),
+            },
           });
           setMenuOpen(false);
         }}
