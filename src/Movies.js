@@ -139,7 +139,7 @@ const movies = [
   },
 
   {
-    id: "-2", 
+    id: "-8", 
     title: "Money Heist",
     type: "Series",
     genre: ["crime", "popular", ""],
@@ -539,6 +539,74 @@ const movies = [
   
   backupIframe: 
       "https://abyssplayer.com/tUGoMmnW0",
+  },
+
+  {
+    id: "-2", 
+    title: "If Wishes Could Kill",
+    type: "Series",
+    genre: ["mystry", "drama", "hero"],
+  overview: "A mysterious app promises wishes — then starts a countdown to death. As a group of teens becomes entangled, they must break the deadly chain to survive.",
+    trailerId: "F7X6BuNgaOk",
+  
+  poster_path: "https://www.themoviedb.org/t/p/w600_and_h900_face/2CfTNVaR8kZQkWtWWE3Cntaiq33.jpg",
+    backdrop_path: "https://image.tmdb.org/t/p/original/jH3SiSNHPDyqrQcwL6hj8LMFMIg.jpg",
+
+    seasons: [
+      {
+        season: 1,
+    episodes: [
+      {
+        ep: 1,
+        title: "Episode 1",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/whD6ZKkiF"
+      },
+      {
+        ep: 2,
+        title: "Episode 2",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/g2-mW2i80"
+      },
+      {
+        ep: 3,
+        title: "Episode 3",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/eBzdzg-Jb"
+      },
+      {
+        ep: 4,
+        title: "Episode 4",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/_KQZOi3Se"
+      },
+      {
+        ep: 5,
+        title: "Episode 5",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/m9QTj9nnO"
+      },
+      {
+        ep: 6,
+        title: "Episode 6",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/V53MDKlKB"
+      },
+      {
+        ep: 7,
+        title: "Episode 7",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/LEgc_A0Ra"
+      },
+      {
+        ep: 8,
+        title: "Episode 8",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/SV_zQ-F82"
+      },
+      ]
+  },
+]
   },
 
 ];
