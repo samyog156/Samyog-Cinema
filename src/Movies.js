@@ -609,6 +609,30 @@ const movies = [
 ]
   },
 
+   {
+    id: "-7",
+    title: "Micheal",
+    genre: ["music","popular","drama","hero",],
+    type: "Movie",
+
+    overview:
+      "The story of Michael Jackson, one of the most influential artists the world has ever known, and his life beyond the music. His journey from the discovery of his extraordinary talent as the lead of the Jackson Five, to the visionary artist whose creative ambition fueled a relentless pursuit to become the biggest entertainer in the world, highlighting both his life off-stage and some of the most iconic performances from his early solo career.",
+
+    poster_path:
+      "https://www.themoviedb.org/t/p/w600_and_h900_face/zm0KAbOjlt9eR5y7vDiL2dEOwMl.jpg",
+
+    backdrop_path:
+      "https://image.tmdb.org/t/p/original/w6Fa1XG5liks9s9bL1qOXP6uL2l.jpg",
+
+    trailerId: "3zOLzsbOleM",
+
+    videoUrl: "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaTvUNEaqGBY2VGbX6Xk7md8fh7bn2T5oLZ1mq/Michael.2026.1080p.WEB.DL.HIN.ENG.x264.AAC.5.1.ESub.mkv",
+  
+  backupIframe: 
+      "https://abyssplayer.com/OvRDU_Dri",
+  },
+
+
 ];
 
 export default movies;
