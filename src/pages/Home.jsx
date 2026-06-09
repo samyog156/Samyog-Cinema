@@ -5,6 +5,7 @@ import { getWishlist, saveWishlist } from "../wishlist";
 import logo from "../assets/logo.png";
 import GenrePage from "./GenrePage";
 import heroBg from "../assets/hero-bg.jpg";
+import { getProgress } from "../watchProgress";
 
 
 import {
@@ -206,6 +207,29 @@ const [anime, setAnime] = useState([]);
   const allGenres = [...new Set(movies.flatMap((m) => m.genre || []))]
   .filter((g) => !["hero", "trending", "popular"].includes(g))
   .sort();
+
+const [continueWatching, setContinueWatching] = useState([]);
+
+useEffect(() => {
+  const progress = getProgress();
+  const threshold = 0.95; // hide if 95%+ complete
+
+  const inProgress = movies
+    .filter((m) => {
+      const p = progress[String(m.id)];
+      if (!p || !p.duration) return false;
+      return (p.currentTime / p.duration) < threshold;
+    })
+    .sort((a, b) => {
+      // most recently watched first — use currentTime as proxy
+      const pa = progress[String(a.id)]?.currentTime || 0;
+      const pb = progress[String(b.id)]?.currentTime || 0;
+      return pb - pa;
+    });
+
+  setContinueWatching(inProgress);
+}, []);
+
 
 const handleMore = (title, moviesList) => {
   navigate(`/genre/${title}`, {
@@ -714,13 +738,77 @@ style={{ backgroundImage: `url(${heroBg})` }}
      {/* CONTENT WRAPPER (IMPORTANT FIX) */}
 <div className="mt-10 md:mt-6 px-0 md:px-0">
 
-  {activeTab === "home" && (
-    <div>
-      <Row title="Trending" movies={trending.slice(0, 15)} onMovieClick={openMovie} onMore={handleMore} />
-      <Row title="Popular" movies={popular.slice(0, 15)} onMovieClick={openMovie} onMore={handleMore} />
-      <Row title="Action" movies={action.slice(0, 15)} onMovieClick={openMovie} onMore={handleMore} />
-    </div>
-  )}
+ {activeTab === "home" && (
+  <div>
+
+    {/* CONTINUE WATCHING */}
+    {continueWatching.length > 0 && (
+      <div className="px-4 md:px-6 mt-0 mb-2">
+
+        <h2
+          className="text-lg md:text-xl font-semibold tracking-wide border-l-4 border-red-600 pl-3 mb-4"
+          style={{ fontFamily: "Inter, sans-serif" }}
+        >
+          Continue Watching
+        </h2>
+
+        <div className="flex gap-2 md:gap-4 overflow-x-auto no-scrollbar pb-8 md:pt-2 md:pl-3">
+          {continueWatching.map((m) => {
+            const p = getProgress()[String(m.id)];
+            const pct = p ? (p.currentTime / p.duration) * 100 : 0;
+
+            return (
+              <div
+                key={m.id}
+                onClick={() => navigate(`/watch/${m.id}`)}
+                className="flex-shrink-0 w-[31%] sm:w-[23%] md:w-[135px] lg:w-[145px] xl:w-[155px] cursor-pointer group relative transition-all duration-300 hover:scale-105 hover:-translate-y-2"
+              >
+                <div className="relative rounded-lg overflow-hidden shadow-lg">
+
+                  {/* TYPE BADGE */}
+                  <div className="absolute top-2 left-2 z-10 bg-white text-black px-2 py-1 rounded text-[10px] font-bold">
+                    {m.type}
+                  </div>
+
+                  <img
+                    src={
+                      m.poster_path?.startsWith("http")
+                        ? m.poster_path
+                        : "https://image.tmdb.org/t/p/w500" + m.poster_path
+                    }
+                    className="w-full aspect-[2/3] object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+
+                  {/* HOVER OVERLAY */}
+                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition" />
+
+                  {/* PROGRESS BAR */}
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-white/20">
+                    <div
+                      className="h-full bg-red-600"
+                      style={{ width: `${pct}%` }}
+                    />
+                  </div>
+
+                </div>
+
+                <p className="mt-2 text-[12px] md:text-sm text-gray-300 line-clamp-1">
+                  {m.title}
+                </p>
+
+              </div>
+            );
+          })}
+        </div>
+
+      </div>
+    )}
+
+    <Row title="Trending" movies={trending.slice(0, 15)} onMovieClick={openMovie} onMore={handleMore} />
+    <Row title="Popular" movies={popular.slice(0, 15)} onMovieClick={openMovie} onMore={handleMore} />
+    <Row title="Action" movies={action.slice(0, 15)} onMovieClick={openMovie} onMore={handleMore} />
+  </div>
+)}
 
  {activeTab === "movies" && (
   <Grid
