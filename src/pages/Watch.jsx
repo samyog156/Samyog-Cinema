@@ -61,7 +61,8 @@ export default function Watch() {
         clearProgress(movie.id);
         clearInterval(iframeTimerRef.current);
       } else {
-        saveProgress(movie.id, elapsedRef.current, assumedDuration);
+        // ── CHANGED: also save season & ep so Continue Watching can resume the right episode ──
+        saveProgress(movie.id, elapsedRef.current, assumedDuration, playingSeason, playingEp);
       }
     }, 1000);
 
@@ -75,8 +76,12 @@ export default function Watch() {
 
   useEffect(() => {
     if (movie?.type === "Series") {
-      setActiveSeason(1);
-      setActiveEpisode({ season: 1, ep: 1 });
+      // ── CHANGED: restore saved season & ep instead of always defaulting to S1E1 ──
+      const saved = getProgress()[String(movie.id)];
+      const season = saved?.season ?? 1;
+      const ep = saved?.ep ?? 1;
+      setActiveSeason(season);
+      setActiveEpisode({ season, ep });
     }
   }, [movie]);
 

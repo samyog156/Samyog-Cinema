@@ -5,7 +5,7 @@ import { getWishlist, saveWishlist } from "../wishlist";
 import logo from "../assets/logo.png";
 import GenrePage from "./GenrePage";
 import heroBg from "../assets/hero-bg.jpg";
-import { getProgress } from "../watchProgress";
+import { getProgress, clearProgress } from "../watchProgress";
 
 
 import {
@@ -205,14 +205,14 @@ const [anime, setAnime] = useState([]);
 
   const navigate = useNavigate();
   const allGenres = [...new Set(movies.flatMap((m) => m.genre || []))]
-  .filter((g) => !["hero", "trending", "popular"].includes(g))
+  .filter((g) => g && !["hero", "trending", "popular",].includes(g))
   .sort();
 
 const [continueWatching, setContinueWatching] = useState([]);
 
 useEffect(() => {
   const progress = getProgress();
-  const threshold = 0.95; // hide if 95%+ complete
+  const threshold = 0.95;
 
   const inProgress = movies
     .filter((m) => {
@@ -221,7 +221,6 @@ useEffect(() => {
       return (p.currentTime / p.duration) < threshold;
     })
     .sort((a, b) => {
-      // most recently watched first — use currentTime as proxy
       const pa = progress[String(a.id)]?.currentTime || 0;
       const pb = progress[String(b.id)]?.currentTime || 0;
       return pb - pa;
@@ -230,6 +229,12 @@ useEffect(() => {
   setContinueWatching(inProgress);
 }, []);
 
+// ── CHANGED: remove a single item from Continue Watching ──
+const removeFromContinueWatching = (e, movieId) => {
+  e.stopPropagation(); // don't navigate to watch page
+  clearProgress(movieId);
+  setContinueWatching((prev) => prev.filter((m) => String(m.id) !== String(movieId)));
+};
 
 const handleMore = (title, moviesList) => {
   navigate(`/genre/${title}`, {
@@ -244,7 +249,6 @@ const deleteProfile = (id) => {
   setProfiles(updatedProfiles);
   localStorage.setItem("profiles", JSON.stringify(updatedProfiles));
 
-  // if deleted profile was active → reset
   const current = JSON.parse(localStorage.getItem("currentProfile"));
 
   if (current?.id === id) {
@@ -271,22 +275,21 @@ useEffect(() => {
 
   if (selectedProfile) {
     setCurrentProfile(selectedProfile);
-    setShowProfilePopup(false); // ✅ already selected → DO NOT show popup
+    setShowProfilePopup(false);
   } else {
-    setShowProfilePopup(true); // ✅ first time only
+    setShowProfilePopup(true);
   }
 }, []);
   
 
   useEffect(() => {
-  // latest movie first
   const sortedMovies = [...movies].sort(
     (a, b) => Number(b.id) - Number(a.id)
   );
 
   const heroMovies = sortedMovies
     .filter((m) => m.genre?.includes("hero"))
-    .slice(0, 10); // ✅ only latest 10
+    .slice(0, 10);
 
   setHero(heroMovies);
 
@@ -393,7 +396,7 @@ useEffect(() => {
     movie.title?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  setSearchResults(results.slice(0, 8)); // limit suggestions
+  setSearchResults(results.slice(0, 8));
 }, [searchTerm, trending, popular, action]);
   return (
     <div className="bg-black text-white min-h-screen w-full overflow-x-hidden pb-[75px] md:pb-0">
@@ -455,7 +458,7 @@ useEffect(() => {
     />
   </div>
 
-  {/* DROPDOWN (FIXED ALIGNMENT) */}
+  {/* DROPDOWN */}
   {searchTerm && searchResults.length > 0 && (
     <div className="absolute left-0 top-full mt-2 w-72 bg-black/95 border border-white/10 rounded-lg max-h-80 overflow-y-auto z-50">
 
@@ -549,8 +552,8 @@ useEffect(() => {
 {menuOpen && (
   <div className="fixed top-[58px] right-3 w-52 bg-black border border-white/10 rounded-lg z-[99999] max-h-[70vh] overflow-y-auto">
 
-    {/* HEADING */}
-    <div className="px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-widest border-b border-white/10">
+    {/* GENRES HEADING */}
+    <div className="px-4 pt-3 pb-1 text-xs font-bold text-gray-400 uppercase tracking-widest">
       Genres
     </div>
 
@@ -635,7 +638,7 @@ useEffect(() => {
       {/* ================= HERO SECTION WRAPPER ================= */}
 <div className="relative">
 
-  {/* ================= DESKTOP HERO (NEW VERSION) ================= */}
+  {/* ================= DESKTOP HERO ================= */}
   <div className="hidden md:block">
     <div 
       className="relative w-full h-[88vh] overflow-hidden bg-cover bg-center"
@@ -690,7 +693,7 @@ style={{ backgroundImage: `url(${heroBg})` }}
     </div>
   </div>
 
-  {/* ================= MOBILE HERO (OLD VERSION - KEEP AS IS) ================= */}
+  {/* ================= MOBILE HERO ================= */}
   <div className="block md:hidden relative mt-[30px] h-[35vh] overflow-hidden">
 
     {hero.map((item, i) => (
@@ -735,7 +738,7 @@ style={{ backgroundImage: `url(${heroBg})` }}
   </div>
 
 </div>
-     {/* CONTENT WRAPPER (IMPORTANT FIX) */}
+     {/* CONTENT WRAPPER */}
 <div className="mt-10 md:mt-6 px-0 md:px-0">
 
  {activeTab === "home" && (
@@ -769,6 +772,14 @@ style={{ backgroundImage: `url(${heroBg})` }}
                   <div className="absolute top-2 left-2 z-10 bg-white text-black px-2 py-1 rounded text-[10px] font-bold">
                     {m.type}
                   </div>
+
+                  {/* ── CHANGED: X button to remove from Continue Watching ── */}
+                  <button
+                    onClick={(e) => removeFromContinueWatching(e, m.id)}
+                    className="absolute top-2 right-2 z-20 bg-black/70 hover:bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center transition"
+                  >
+                    <X size={11} strokeWidth={2.5} />
+                  </button>
 
                   <img
                     src={
@@ -920,7 +931,7 @@ style={{ backgroundImage: `url(${heroBg})` }}
             {/* ACTIONS */}
             <div className="flex items-center gap-4 mt-5">
 
-              {/* WATCH TRAILER */}
+              {/* WATCH */}
               <button
   onClick={() => navigate(`/watch/${selected.id}`)}
   className="bg-white text-black hover:bg-red-600 hover:text-white px-5 py-2 rounded flex items-center gap-2 font-semibold transition duration-300"
@@ -990,7 +1001,7 @@ style={{ backgroundImage: `url(${heroBg})` }}
       {profile.name}
     </button>
 
-    {/* DELETE BUTTON (ALWAYS VISIBLE) */}
+    {/* DELETE BUTTON */}
     <button
       onClick={() => deleteProfile(profile.id)}
       className="absolute top-1 right-1 text-white text-xs bg-red-600 w-5 h-5 rounded-full flex items-center justify-center"
@@ -1109,4 +1120,3 @@ style={{ backgroundImage: `url(${heroBg})` }}
     </div>
   );
 }
-

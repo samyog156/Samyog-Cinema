@@ -10,13 +10,11 @@ export function getProgress() {
   }
 }
 
-export function saveProgress(movieId, currentTime, duration) {
-  if (!duration || duration === 0) return;
+export function saveProgress(id, currentTime, duration, season = null, ep = null) {
   const all = getProgress();
-  all[String(movieId)] = { currentTime, duration };
-  localStorage.setItem(KEY, JSON.stringify(all));
+  all[String(id)] = { currentTime, duration, ...(season != null && { season, ep }) };
+  localStorage.setItem("watchProgress", JSON.stringify(all));
 }
-
 export function clearProgress(movieId) {
   const all = getProgress();
   delete all[String(movieId)];

@@ -140,14 +140,14 @@ const movies = [
 
   {
     id: "-2", 
-    title: "Money Heist Season 1",
+    title: "Money Heist",
     type: "Series",
     genre: ["crime", "popular", ""],
   overview: "To carry out the biggest heist in history, a mysterious man called The Professor recruits a band of eight robbers who have a single characteristic: none of them has anything to lose. Five months of seclusion - memorizing every step, every detail, every probability - culminate in eleven days locked up in the National Coinage and Stamp Factory of Spain, surrounded by police forces.",
-    trailerId: "F3NYYVle3_E",
+    trailerId: "_InqQJRqGW4",
   
-  poster_path: "https://image.tmdb.org/t/p/original/tfc5L5zhJhn3NLXss29HMD3lnTC.jpg",
-    backdrop_path: "https://image.tmdb.org/t/p/original/2f92nfDnutSdrqEfwiZcOFWuNLH.jpg",
+  poster_path: "https://image.tmdb.org/t/p/original/reEMJA1uzscCbkpeRJeTT2bjqUp.jpg",
+    backdrop_path: "https://image.tmdb.org/t/p/original/zAIippNnm6o0gYEtjapbjQSxP8G.jpg",
 
     seasons: [
       {
