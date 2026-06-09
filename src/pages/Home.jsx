@@ -176,6 +176,8 @@ const Grid = ({ title, movies, onMovieClick }) => (
 
 
 export default function Home() {
+
+  
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 const [mobileSearchTerm, setMobileSearchTerm] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -201,6 +203,9 @@ const [anime, setAnime] = useState([]);
   const [videoUrl, setVideoUrl] = useState(null);
 
   const navigate = useNavigate();
+  const allGenres = [...new Set(movies.flatMap((m) => m.genre || []))]
+  .filter((g) => !["hero", "trending", "popular", "action"].includes(g))
+  .sort();
 
 const handleMore = (title, moviesList) => {
   navigate(`/genre/${title}`, {
@@ -517,26 +522,29 @@ useEffect(() => {
   </div>
 
   {/* ================= MOBILE MENU ================= */}
-  {menuOpen && (
-    <div className="fixed top-[58px] right-3 w-52 bg-black border border-white/10 rounded-lg z-[99999]">
+{menuOpen && (
+  <div className="fixed top-[58px] right-3 w-52 bg-black border border-white/10 rounded-lg z-[99999] max-h-[70vh] overflow-y-auto">
 
-      {["home", "movies", "series", "anime", "wishlist"].map((tab) => (
-        <button
-          key={tab}
-          onClick={() => {
-            setActiveTab(tab);
-            setMenuOpen(false);
-          }}
-          className={`w-full text-left px-4 py-3 capitalize hover:bg-white/10 ${
-            activeTab === tab ? "text-red-500" : "text-white"
-          }`}
-        >
-          {tab.charAt(0).toUpperCase() + tab.slice(1)}
-        </button>
-      ))}
+    {allGenres.map((genre) => (
+      <button
+        key={genre}
+        onClick={() => {
+          const filtered = movies
+            .filter((m) => m.genre?.includes(genre))
+            .sort((a, b) => Number(b.id) - Number(a.id));
+          navigate(`/genre/${genre}`, {
+            state: { movies: filtered, title: genre.charAt(0).toUpperCase() + genre.slice(1) }
+          });
+          setMenuOpen(false);
+        }}
+        className="w-full text-left px-4 py-3 capitalize hover:bg-white/10 text-white"
+      >
+        {genre.charAt(0).toUpperCase() + genre.slice(1)}
+      </button>
+    ))}
 
-    </div>
-  )}
+  </div>
+)}
 
   {mobileSearchOpen && (
   <div className="fixed top-[58px] left-0 w-full bg-black border-b border-white/10 p-3 z-[999]">

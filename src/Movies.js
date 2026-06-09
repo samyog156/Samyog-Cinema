@@ -17,7 +17,7 @@ const movies = [
     trailerId: "CzofKTEj404",
 
     videoUrl:
-      "https://ia800500.us.archive.org/34/items/kara.-2026.1080p.-hevc.-ds-4-k.-web-dl.-hindi.-5.1-tamil.-5.1.-esub.x-265-hdhub-4u.-ms/Kara.2026.1080p.HEVC.DS4K.WEB-DL.Hindi.5.1-Tamil.5.1.ESub.x265-HDHub4u.Ms.mp4",
+      "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaTvRYgOxF3FIjcxXbr4GlIhoXl1mbtY4fZLhV/Kara 2026 1080p DS4K WEB-DL Hindi 5 1-Tamil 5 1 ES.mkv",
   
       backupIframe: 
       "https://abyssplayer.com/GkAylUDdL",
@@ -132,7 +132,7 @@ const movies = [
 
     trailerId: "NHk7scrb_9I",
 
-    videoUrl: "https://ia600100.us.archive.org/25/items/dhurandhar-the.-revenge.-2026.720p.-hevc.-hindi.-ds-4-k.-web-dl.-esub.x-265-hdhub-4u.-ag/Dhurandhar-The.Revenge.2026.720p.HEVC.Hindi.DS4K.WEB-DL.ESub.x265-HDHub4u.Ag.mp4",
+    videoUrl: "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaT8n2Pi8mNnXiWwKcRtN9mBlw0Xp2evTj7GBj/Dhurandhar The Revenge 2026 Hindi HDTC 1080p x264 AAC HC.mkv",
   
   backupIframe: 
       "https://abyssplayer.com/2ozhGJD6E",
@@ -149,6 +149,9 @@ const movies = [
   poster_path: "https://image.tmdb.org/t/p/original/tfc5L5zhJhn3NLXss29HMD3lnTC.jpg",
     backdrop_path: "https://image.tmdb.org/t/p/original/2f92nfDnutSdrqEfwiZcOFWuNLH.jpg",
 
+    seasons: [
+      {
+        season: 1,
     episodes: [
       {
         ep: 1,
@@ -228,6 +231,261 @@ const movies = [
         videoUrl: "",
         backupIframe: "https://abyssplayer.com/KaVCOgvln"
       }
+    ]
+  },
+{
+  season: 2,
+    episodes: [
+      {
+        ep: 1,
+        title: "Episode 1",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/7NW3TqMjO"
+      },
+      {
+        ep: 2,
+        title: "Episode 2",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/KJgAvVcSc"
+      },
+      {
+        ep: 3,
+        title: "Episode 3",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/w0DXN4git"
+      },
+      {
+        ep: 4,
+        title: "Episode 4",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/Oq8ubXb1U"
+      },
+      {
+        ep: 5,
+        title: "Episode 5",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/_k7WOlPOn"
+      },
+      {
+        ep: 6,
+        title: "Episode 6",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/8QAY-gR2xk"
+      },
+      {
+        ep: 7,
+        title: "Episode 7",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/GvJfwoVG4"
+      },
+      {
+        ep: 8,
+        title: "Episode 8",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/mlX18zeI1"
+      },
+      {
+        ep: 9,
+        title: "Episode 9",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/WUOEB11y4"
+      },
+    ]
+    },
+
+    {
+  season: 3,
+    episodes: [
+      {
+        ep: 1,
+        title: "Episode 1",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/gDTIoU1-Z"
+      },
+      {
+        ep: 2,
+        title: "Episode 2",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/ggu-JLPuMS"
+      },
+      {
+        ep: 3,
+        title: "Episode 3",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/_2yBFibPy"
+      },
+      {
+        ep: 4,
+        title: "Episode 4",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/fVvWFKQBx"
+      },
+      {
+        ep: 5,
+        title: "Episode 5",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/bwWCP2Fda"
+      },
+      {
+        ep: 6,
+        title: "Episode 6",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/4FEC9X8NK"
+      },
+      {
+        ep: 7,
+        title: "Episode 7",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/sV_a4JClz"
+      },
+      {
+        ep: 8,
+        title: "Episode 8",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/zS-4c-Sun"
+      },
+      
+    ]
+    },
+
+    {
+  season: 4,
+    episodes: [
+      {
+        ep: 1,
+        title: "Episode 1",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/P50_daZF3"
+      },
+      {
+        ep: 2,
+        title: "Episode 2",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/dFQm4ZrVB"
+      },
+      {
+        ep: 3,
+        title: "Episode 3",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/YzqArVoBU"
+      },
+      {
+        ep: 4,
+        title: "Episode 4",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/_eA5aDWCw"
+      },
+      {
+        ep: 5,
+        title: "Episode 5",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/eAIaesZWv"
+      },
+      {
+        ep: 6,
+        title: "Episode 6",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/3J6hZ7dtb"
+      },
+      {
+        ep: 7,
+        title: "Episode 7",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/nAIdIpubf"
+      },
+      {
+        ep: 8,
+        title: "Episode 8",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/WYzIoS3tx"
+      },
+      
+    ]
+    },
+
+    {
+        season: 1,
+    episodes: [
+      {
+        ep: 1,
+        title: "Episode 1",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/F9ZaFGHIGI"
+      },
+      {
+        ep: 2,
+        title: "Episode 2",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/FZLVh08sz"
+      },
+      {
+        ep: 3,
+        title: "Episode 3",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/x7v6ONDfv"
+      },
+      {
+        ep: 4,
+        title: "Episode 4",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/R-dbvC0g7"
+      },
+      {
+        ep: 5,
+        title: "Episode 5",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/-1h8IMX4K"
+      },
+      {
+        ep: 6,
+        title: "Episode 6",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/LNTylMLRZ"
+      },
+      {
+        ep: 7,
+        title: "Episode 7",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/qlJUv4Sg5"
+      },
+      {
+        ep: 8,
+        title: "Episode 8",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/t090bAA9R"
+      },
+      {
+        ep: 9,
+        title: "Episode 9",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/gDDjkWTD3"
+      },
+      {
+        ep: 10,
+        title: "Episode 10",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/KqNqtgQRk"
+      },
+      {
+        ep: 11,
+        title: "Episode 11",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/I3rZ1Hknm"
+      },
+      {
+        ep: 12,
+        title: "Episode 12",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/87VVINI7q"
+      },
+      {
+        ep: 13,
+        title: "Episode 13",
+        videoUrl: "",
+        backupIframe: "https://abyssplayer.com/KaVCOgvln"
+      }
+    ]
+  },
     ]
   },
 

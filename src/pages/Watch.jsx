@@ -9,40 +9,45 @@ import CustomVideoPlayer from "../CustomVideoPlayer";
 export default function Watch() {
   const { id } = useParams();
   const movie = movies.find((m) => String(m.id) === String(id));
-  
 
   const [wishlist, setWishlist] = useState([]);
   const [showPlayer, setShowPlayer] = useState(false);
   const playerRef = useRef(null);
   const [useIframe, setUseIframe] = useState(false);
-const [videoFailed, setVideoFailed] = useState(false);
-const [showEpisodes, setShowEpisodes] = useState(false);
-const [selectedEpisode, setSelectedEpisode] = useState(null);
-const currentVideo =
-  movie.type === "Series"
-    ? selectedEpisode
-    : movie;
+  const [videoFailed, setVideoFailed] = useState(false);
+  const [showEpisodes, setShowEpisodes] = useState(false);
+  const [activeSeason, setActiveSeason] = useState(1);
+  const [activeEpisode, setActiveEpisode] = useState({ season: 1, ep: 1 });
+  const [menuMode, setMenuMode] = useState(null);
 
+  const playingSeason = activeEpisode.season;
+  const playingEp = activeEpisode.ep;
+
+  const currentSeason = movie?.seasons?.find(
+    (s) => s.season === activeSeason
+  );
+
+  const currentVideo =
+    currentSeason?.episodes?.find(
+      (e) => e.ep === activeEpisode.ep
+    ) || currentSeason?.episodes?.[0];
+
+  useEffect(() => {
+    if (movie?.type === "Series") {
+      setActiveSeason(1);
+      setActiveEpisode({ season: 1, ep: 1 });
+    }
+  }, [movie]);
 
   useEffect(() => {
     setWishlist(getWishlist());
   }, []);
 
   useEffect(() => {
-  if (movie?.type === "Series" && movie.episodes?.length) {
-    setSelectedEpisode(movie.episodes[0]);
-  }
-}, [movie]);
-
-  useEffect(() => {
     return () => {
       setShowPlayer(false);
     };
   }, []);
-
-
-  
-  
 
   if (!movie)
     return <div className="text-white p-10">Movie not found</div>;
@@ -54,7 +59,6 @@ const currentVideo =
       {!showPlayer && (
         <div className="relative w-full h-[30vh] md:h-[100vh] overflow-hidden">
 
-          {/* BACKDROP IMAGE */}
           <img
             src={
               movie.backdrop_path?.startsWith("http")
@@ -64,21 +68,12 @@ const currentVideo =
             className="
               absolute inset-0 w-full h-full object-contain bg-black
               md:object-cover
-
-              /* ✅ MOBILE ONLY FIX */
               object-[center_10%]
             "
           />
 
-          {/* HERO OVERLAY */}
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent flex items-end">
-
-            <div className="
-              p-6 md:p-10 max-w-3xl
-
-              /* ✅ MOBILE ONLY: slightly tighter spacing feel */
-              pb-4
-            ">
+            <div className="p-6 md:p-10 max-w-3xl pb-4">
 
               <h1 className="text-3xl md:text-5xl font-extrabold mb-3">
                 {movie.title}
@@ -107,11 +102,9 @@ const currentVideo =
                     const exists = current.some(
                       (m) => String(m.id) === String(movie.id)
                     );
-
                     const updated = exists
                       ? current.filter((m) => String(m.id) !== String(movie.id))
                       : [...current, movie];
-
                     setWishlist(updated);
                     saveWishlist(updated);
                   }}
@@ -133,163 +126,193 @@ const currentVideo =
         </div>
       )}
 
+      {/* ================= SEASONS / EPISODES MENU ================= */}
       {showPlayer &&
- movie.type === "Series" &&
- movie.episodes?.length > 0 && (
-  <div className="absolute top-3 left-3 md:left-10 z-50">
+        movie.type === "Series" &&
+        movie.seasons?.length > 0 && (
+          <div className="absolute top-3 left-3 md:left-10 z-50">
 
-    {/* EPISODES BUTTON */}
-    <button
-      onClick={() =>
-        setShowEpisodes(!showEpisodes)
-      }
-      className="bg-black/80 backdrop-blur-md border border-white/10 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-600 transition"
-    >
-      Episodes
-    </button>
+            <button
+              onClick={() => {
+                if (menuMode === "seasons" || menuMode === "episodes") {
+                  setMenuMode(null);
+                } else {
+                  setMenuMode("seasons");
+                }
+              }}
+              className="bg-black/80 backdrop-blur-md border border-white/10 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-600 transition"
+            >
+              Seasons
+            </button>
 
-    {/* DROPDOWN */}
-    {showEpisodes && (
-      <div className="mt-2 bg-black/95 border border-white/10 rounded-lg p-2 w-48 shadow-2xl">
+            {/* SEASONS MENU */}
+            {menuMode === "seasons" && (
+              <div className="mt-2 bg-black/95 border border-white/10 rounded-lg p-2 w-48 shadow-2xl">
+                <div className="max-h-56 overflow-y-auto custom-vertical-slider pr-2">
+                  {movie.seasons.map((s) => {
+                    const isSeasonActive = playingSeason === s.season;
+                    return (
+                      <button
+                        key={s.season}
+                        onClick={() => {
+                          setActiveSeason(s.season);
+                          setMenuMode("episodes");
+                        }}
+                        className={`w-full text-left px-3 py-2 rounded-md text-sm mb-1 transition ${
+                          isSeasonActive
+                            ? "bg-red-600 text-white"
+                            : "bg-white/10 text-gray-300 hover:bg-white/20"
+                        }`}
+                      >
+                        Season {s.season}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
 
-  <div className="max-h-56 overflow-y-auto pr-2 custom-vertical-slider">
-  {movie.episodes.map((ep) => (
-    <button
-      key={ep.ep}
-      onClick={() => {
-        setSelectedEpisode(ep);
-        setUseIframe(false);
-        setShowEpisodes(false);
-      }}
-      className={`w-full text-left px-3 py-2 rounded-md text-sm mb-1 transition ${
-        selectedEpisode?.ep === ep.ep
-          ? "bg-red-600 text-white"
-          : "bg-white/10 text-gray-300 hover:bg-white/20"
-      }`}
-    >
-      Episode {ep.ep}
-    </button>
-  ))}
-</div>
+            {/* EPISODES MENU */}
+            {menuMode === "episodes" && (
+              <div className="mt-2 bg-black/95 border border-white/10 rounded-lg p-2 w-56 shadow-2xl">
 
-</div>
-    )}
+                <button
+                  onClick={() => setMenuMode("seasons")}
+                  className="text-left w-full mb-2 px-2 py-1 text-sm text-white/80 hover:text-white"
+                >
+                  ← Season {activeSeason}
+                </button>
 
-  </div>
-)}
+                <div className="max-h-56 overflow-y-auto custom-vertical-slider pr-2">
+                  {movie.seasons
+                    .find((s) => s.season === activeSeason)
+                    ?.episodes.map((ep) => {
+                      const isActive =
+                        playingSeason === activeSeason &&
+                        playingEp === ep.ep;
+                      return (
+                        <button
+                          key={ep.ep}
+                          onClick={() => {
+                            setActiveEpisode({ season: activeSeason, ep: ep.ep });
+                            setMenuMode(null);
+                          }}
+                          className={`w-full text-left px-3 py-2 rounded-md text-sm mb-1 transition ${
+                            isActive
+                              ? "bg-red-600 text-white"
+                              : "bg-white/10 text-gray-300 hover:bg-white/20"
+                          }`}
+                        >
+                          Episode {ep.ep}
+                        </button>
+                      );
+                    })}
+                </div>
+              </div>
+            )}
 
-     {/* ================= PLAYER ================= */}
-{showPlayer && (
-  <div className="pt-1 px-0 md:px-6">
-    <div className="w-full max-w-[100vw] md:max-w-7xl mx-auto px-2 md:px-0">
+          </div>
+        )}
 
-      <div className="w-full md:w-auto scale-[1.05] md:scale-100 origin-top relative">
+      {/* ================= PLAYER ================= */}
+      {showPlayer && (
+        <div className="pt-1 px-0 md:px-6">
+          <div className="w-full max-w-[100vw] md:max-w-7xl mx-auto px-2 md:px-0">
 
-        {/* ================= PLAYER ================= */}
-        {!useIframe && currentVideo?.videoUrl ? (
-  <CustomVideoPlayer
-    key={currentVideo.videoUrl}
-    src={currentVideo.videoUrl}
-  />
-) : (
-  <iframe
-    src={currentVideo?.backupIframe}
-    className="
-      w-[340px] h-[220px]
-      md:w-full md:h-[75vh]
-      rounded-lg mx-auto
-    "
-    allowFullScreen
-  />
-)}
+            <div className="w-full md:w-auto scale-[1.05] md:scale-100 origin-top relative">
 
-        {/* ================= INFO + SWITCH BUTTON ================= */}
-        <div className="flex items-start justify-between mt-3 md:mt-2 px-1 md:px-0">
-<div className="mt-3 md:mt-2 px-1 md:px-0">
+              {!useIframe && currentVideo?.videoUrl ? (
+                <CustomVideoPlayer
+                  key={currentVideo.videoUrl}
+                  src={currentVideo.videoUrl}
+                />
+              ) : (
+                <iframe
+                  src={currentVideo?.backupIframe}
+                  className="
+                    w-[340px] h-[220px]
+                    md:w-full md:h-[75vh]
+                    rounded-lg mx-auto
+                  "
+                  allowFullScreen
+                />
+              )}
 
-  {/* TITLE */}
-  <div className="flex items-center justify-between gap-3">
-  <h1 className="text-2xl md:text-3xl font-bold">
-    {movie.title}
-  </h1>
+              {/* ================= TITLE + INFO ================= */}
+              <div className="mt-3 md:mt-2 px-1 md:px-0">
 
-  <button
-    onClick={() => {
-      const current = getWishlist();
-      const exists = current.some(
-        (m) => String(m.id) === String(movie.id)
-      );
+                {/* TITLE ROW with heart inline */}
+                <div className="flex items-center gap-3">
+                  <h1 className="text-2xl md:text-3xl font-bold">
+                    {movie.title}
+                  </h1>
+                  <button
+                    onClick={() => {
+                      const current = getWishlist();
+                      const exists = current.some(
+                        (m) => String(m.id) === String(movie.id)
+                      );
+                      const updated = exists
+                        ? current.filter((m) => String(m.id) !== String(movie.id))
+                        : [...current, movie];
+                      setWishlist(updated);
+                      saveWishlist(updated);
+                    }}
+                  >
+                    <Heart
+                      size={24}
+                      className={
+                        wishlist.some((m) => String(m.id) === String(movie.id))
+                          ? "text-white fill-white"
+                          : "text-white"
+                      }
+                    />
+                  </button>
+                </div>
 
-      const updated = exists
-        ? current.filter((m) => String(m.id) !== String(movie.id))
-        : [...current, movie];
+                {/* SEASON + EPISODE LABEL */}
+                {movie.type === "Series" && (
+                  <p className="text-sm text-gray-400 mt-1">
+                    Season {playingSeason} &nbsp;·&nbsp; Episode {playingEp}
+                  </p>
+                )}
 
-      setWishlist(updated);
-      saveWishlist(updated);
-    }}
-  >
-    <Heart
-      size={24}
-      className={
-        wishlist.some((m) => String(m.id) === String(movie.id))
-          ? "text-white fill-white"
-          : "text-white"
-      }
-    />
-  </button>
-</div>
+                {/* BACKUP PLAYER MESSAGE */}
+                <div className="text-sm text-gray-400 mt-2 flex items-center gap-1 flex-wrap">
+                  {!currentVideo?.videoUrl ? (
+                    <span className="text-red-500 font-semibold">
+                      Playing Backup Player
+                    </span>
+                  ) : useIframe ? (
+                    <>
+                      <span>Using backup player.</span>
+                      <button
+                        onClick={() => setUseIframe(false)}
+                        className="text-blue-500 font-semibold hover:underline"
+                      >
+                        Switch to main player
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <span>If the video fails to load, try</span>
+                      <button
+                        onClick={() => setUseIframe(true)}
+                        className="text-red-500 font-semibold hover:underline"
+                      >
+                        backup player
+                      </button>
+                      .
+                    </>
+                  )}
+                </div>
 
-  {/* BACKUP MESSAGE BELOW TITLE */}
-<div className="text-sm text-gray-400 mt-2 flex items-center gap-1 flex-wrap">
+              </div>
 
-  {/* AUTO BACKUP MODE */}
-  {!currentVideo?.videoUrl ? (
-    <>
-      <span className="text-red-500 font-semibold">
-        Playing Backup Player
-      </span>
-    </>
-  ) : useIframe ? (
-    
-    /* MANUAL BACKUP SWITCH */
-    <>
-      <span>Using backup player.</span>
-
-      <button
-        onClick={() => setUseIframe(false)}
-        className="text-blue-500 font-semibold hover:underline"
-      >
-        Switch to main player
-      </button>
-    </>
-  ) : (
-    
-    /* MAIN PLAYER MODE */
-    <>
-      <span>If the video fails to load, try</span>
-
-      <button
-        onClick={() => setUseIframe(true)}
-        className="text-red-500 font-semibold hover:underline"
-      >
-        backup player
-      </button>
-      .
-    </>
-  )}
-</div>
-  
-
-</div>
-
-
+            </div>
+          </div>
         </div>
-
-      </div>
-    </div>
-  </div>
-)}
-      
+      )}
 
       {/* ================= SUGGESTIONS ================= */}
       <div className="max-w-7xl mx-auto px-6 mt-10">
@@ -299,14 +322,11 @@ const currentVideo =
         </h2>
 
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-2 md:gap-4">
-
           {movies
             .filter(
               (m) =>
                 m.id !== movie.id &&
-                m.genre?.some((g) =>
-                  movie.genre?.includes(g)
-                )
+                m.genre?.some((g) => movie.genre?.includes(g))
             )
             .slice(0, 12)
             .map((m) => (
@@ -315,13 +335,10 @@ const currentVideo =
                 className="cursor-pointer group relative transition-all duration-300 hover:scale-105 hover:-translate-y-2"
                 onClick={() => (window.location.href = `/watch/${m.id}`)}
               >
-
                 <div className="relative rounded-md overflow-hidden shadow-md">
-
                   <div className="absolute top-2 left-2 z-10 bg-white text-black px-2 py-1 rounded text-[10px] font-bold">
                     {m.type}
                   </div>
-
                   <img
                     src={
                       m.poster_path?.startsWith("http")
@@ -330,18 +347,13 @@ const currentVideo =
                     }
                     className="w-full aspect-[2/3] object-cover transition-transform duration-300 group-hover:scale-105"
                   />
-
                   <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition" />
-
                 </div>
-
                 <p className="mt-1 text-[12px] md:text-sm text-gray-300 line-clamp-1">
                   {m.title}
                 </p>
-
               </div>
             ))}
-
         </div>
 
       </div>
