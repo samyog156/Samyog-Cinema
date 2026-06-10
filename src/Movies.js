@@ -89,7 +89,7 @@ const movies = [
     videoUrl: "",
   
   backupIframe: 
-      "https://abyssplayer.com/eUhDNttmg",
+      "https://samyogcinema.player4me.xyz/#6mlg9",
   },
 
   {
