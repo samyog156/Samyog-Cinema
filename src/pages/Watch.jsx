@@ -251,6 +251,7 @@ export default function Watch() {
                 />
               ) : (
                 <iframe
+                key={`${playingSeason}-${playingEp}`}
                   src={currentVideo?.backupIframe}
                   className="w-[340px] h-[220px] md:w-full md:h-[75vh] rounded-lg mx-auto"
                   allowFullScreen
