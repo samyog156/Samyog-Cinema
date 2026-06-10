@@ -66,7 +66,7 @@ const movies = [
     videoUrl: "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaTvXFNWHSM9l6f8JeVMKz18IekbynEI4iqLEu/Ginny.Wedss.Sunny.2.2026.720p.AMZN.WEB.DL.Hindi.AAC2.0.H.264.mkv",
   
   backupIframe: 
-      "https://abyssplayer.com/UZDwpw5LO",
+      "https://samyogcinema.player4me.xyz/#8sbmm",
   },
 
   {
@@ -240,55 +240,55 @@ const movies = [
         ep: 1,
         title: "Episode 1",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/7NW3TqMjO"
+        backupIframe: "https://samyogcinema.player4me.xyz/#d5q8n"
       },
       {
         ep: 2,
         title: "Episode 2",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/KJgAvVcSc"
+        backupIframe: "https://samyogcinema.player4me.xyz/#eh96s"
       },
       {
         ep: 3,
         title: "Episode 3",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/w0DXN4git"
+        backupIframe: "https://samyogcinema.player4me.xyz/#gt53q"
       },
       {
         ep: 4,
         title: "Episode 4",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/Oq8ubXb1U"
+        backupIframe: "https://samyogcinema.player4me.xyz/#6mlhs"
       },
       {
         ep: 5,
         title: "Episode 5",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/_k7WOlPOn"
+        backupIframe: "https://samyogcinema.player4me.xyz/#k3oav"
       },
       {
         ep: 6,
         title: "Episode 6",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/8QAY-gR2xk"
+        backupIframe: "https://samyogcinema.player4me.xyz/#y1stm"
       },
       {
         ep: 7,
         title: "Episode 7",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/GvJfwoVG4"
+        backupIframe: "https://samyogcinema.player4me.xyz/#xqyz9"
       },
       {
         ep: 8,
         title: "Episode 8",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/mlX18zeI1"
+        backupIframe: "https://samyogcinema.player4me.xyz/#r93am"
       },
       {
         ep: 9,
         title: "Episode 9",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/WUOEB11y4"
+        backupIframe: "https://samyogcinema.player4me.xyz/#ocbyf"
       },
     ]
     },
@@ -538,7 +538,7 @@ const movies = [
     videoUrl: "",
   
   backupIframe: 
-      "https://abyssplayer.com/tUGoMmnW0",
+      "https://samyogcinema.player4me.xyz/#9kscm",
   },
 
   {
@@ -560,49 +560,49 @@ const movies = [
         ep: 1,
         title: "Episode 1",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/whD6ZKkiF"
+        backupIframe: "https://samyogcinema.player4me.xyz/#nwtrp"
       },
       {
         ep: 2,
         title: "Episode 2",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/g2-mW2i80"
+        backupIframe: "https://samyogcinema.player4me.xyz/#ibwei"
       },
       {
         ep: 3,
         title: "Episode 3",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/eBzdzg-Jb"
+        backupIframe: "https://samyogcinema.player4me.xyz/#qj1no"
       },
       {
         ep: 4,
         title: "Episode 4",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/_KQZOi3Se"
+        backupIframe: "https://samyogcinema.player4me.xyz/#s6fq5"
       },
       {
         ep: 5,
         title: "Episode 5",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/m9QTj9nnO"
+        backupIframe: "https://samyogcinema.player4me.xyz/#hrkzt"
       },
       {
         ep: 6,
         title: "Episode 6",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/V53MDKlKB"
+        backupIframe: "https://samyogcinema.player4me.xyz/#hrkgk"
       },
       {
         ep: 7,
         title: "Episode 7",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/LEgc_A0Ra"
+        backupIframe: "https://samyogcinema.player4me.xyz/#y1sxz"
       },
       {
         ep: 8,
         title: "Episode 8",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/SV_zQ-F82"
+        backupIframe: "https://samyogcinema.player4me.xyz/#hrka5"
       },
       ]
   },
