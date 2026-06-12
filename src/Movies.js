@@ -157,7 +157,7 @@ const movies = [
         ep: 1,
         title: "Episode 1",
         videoUrl: "",
-        backupIframe: "https://samyogcinema.player4me.xyz/#6mbp9"
+        backupIframe: "https://samyogcinema.rpmvid.com/#qxlmz6"
       },
       {
         ep: 2,
