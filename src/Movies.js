@@ -112,7 +112,7 @@ const movies = [
     videoUrl: "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaT8kbov69fetZl71gUhLtU6vFVCuJAlsLwlCS/Dhurandhar.2025.DS4K.720p.Hindi.WEB-DL.5.1.ESub.x264-.mkv",
   
   backupIframe: 
-      "https://abyssplayer.com/BpzFinS-C",
+      "https://samyogcinema.player4me.xyz/#18gjs",
   },
 
   {
@@ -135,7 +135,7 @@ const movies = [
     videoUrl: "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaT8n2Pi8mNnXiWwKcRtN9mBlw0Xp2evTj7GBj/Dhurandhar The Revenge 2026 Hindi HDTC 1080p x264 AAC HC.mkv",
   
   backupIframe: 
-      "https://abyssplayer.com/2ozhGJD6E",
+      "https://samyogcinema.player4me.xyz/#ocp8o",
   },
 
   {
@@ -300,49 +300,49 @@ const movies = [
         ep: 1,
         title: "Episode 1",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/gDTIoU1-Z"
+        backupIframe: "https://samyogcinema.player4me.xyz/#8sprp"
       },
       {
         ep: 2,
         title: "Episode 2",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/ggu-JLPuMS"
+        backupIframe: "https://samyogcinema.player4me.xyz/#xqfua"
       },
       {
         ep: 3,
         title: "Episode 3",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/_2yBFibPy"
+        backupIframe: "https://samyogcinema.player4me.xyz/#zu3mr"
       },
       {
         ep: 4,
         title: "Episode 4",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/fVvWFKQBx"
+        backupIframe: "https://samyogcinema.player4me.xyz/#nwycp"
       },
       {
         ep: 5,
         title: "Episode 5",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/bwWCP2Fda"
+        backupIframe: "https://samyogcinema.player4me.xyz/#s6e3u"
       },
       {
         ep: 6,
         title: "Episode 6",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/4FEC9X8NK"
+        backupIframe: "https://samyogcinema.player4me.xyz/#8spkd"
       },
       {
         ep: 7,
         title: "Episode 7",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/sV_a4JClz"
+        backupIframe: "https://samyogcinema.player4me.xyz/#hrbde"
       },
       {
         ep: 8,
         title: "Episode 8",
         videoUrl: "",
-        backupIframe: "https://abyssplayer.com/zS-4c-Sun"
+        backupIframe: "https://samyogcinema.player4me.xyz/#gt8wj"
       },
       
     ]
