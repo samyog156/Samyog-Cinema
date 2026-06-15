@@ -20,7 +20,7 @@ const movies = [
       "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaTvRYgOxF3FIjcxXbr4GlIhoXl1mbtY4fZLhV/Kara 2026 1080p DS4K WEB-DL Hindi 5 1-Tamil 5 1 ES.mkv",
   
       backupIframe: 
-      "https://abyssplayer.com/GkAylUDdL",
+      "https://samyogcinema.player4me.xyz/#k3xpu",
     },
 
   {
@@ -492,7 +492,7 @@ const movies = [
     videoUrl: "https://hubstream.sujanbotz.workers.dev/dl/lLuGQMdHL8b8VtlqoRigPmtdpVfsusiqTSOP0b7zaaTvXFOhBBbWG2QrjY0XiYCM8e1jZW169yR3J9/Dacoit-Ek.Prem.Katha.2026.720p.Hindi.DS4K.WEB-DL.5.1.ESub.x2.mkv",
   
   backupIframe: 
-      "https://abyssplayer.com/5VMmJ0LEx",
+      "https://samyogcinema.player4me.xyz/#gtfue",
   },
 
   {
